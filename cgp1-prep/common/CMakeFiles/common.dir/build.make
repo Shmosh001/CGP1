@@ -26,22 +26,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /opt/local/bin/cmake
+CMAKE_COMMAND = /usr/bin/cmake
 
 # The command to remove a file.
-RM = /opt/local/bin/cmake -E remove -f
+RM = /usr/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
-# The program to use to edit the cache.
-CMAKE_EDIT_COMMAND = /opt/local/bin/ccmake
-
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts"
+CMAKE_SOURCE_DIR = /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts"
+CMAKE_BINARY_DIR = /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep
 
 # Include any dependencies generated for this target.
 include common/CMakeFiles/common.dir/depend.make
@@ -52,204 +49,41 @@ include common/CMakeFiles/common.dir/progress.make
 # Include the compile flags for this target's objects.
 include common/CMakeFiles/common.dir/flags.make
 
-common/source2cpp.cpp: common/../basicgui/shaders/basic.vert
-common/source2cpp.cpp: common/../basicgui/shaders/basic.frag
-common/source2cpp.cpp: common/../basicgui/shaders/genNormal.vert
-common/source2cpp.cpp: common/../basicgui/shaders/genNormal.frag
-common/source2cpp.cpp: common/../basicgui/shaders/simple.vert
-common/source2cpp.cpp: common/../basicgui/shaders/simple.frag
-common/source2cpp.cpp: common/../basicgui/shaders/phong.vert
-common/source2cpp.cpp: common/../basicgui/shaders/phong.frag
-common/source2cpp.cpp: common/../basicgui/shaders/phongRS.vert
-common/source2cpp.cpp: common/../basicgui/shaders/phongRS.frag
-common/source2cpp.cpp: common/../basicgui/shaders/phongRSmanip.vert
-common/source2cpp.cpp: common/../basicgui/shaders/phongRSmanip.frag
-common/source2cpp.cpp: common/../basicgui/shaders/rad_scaling_pass1.vert
-common/source2cpp.cpp: common/../basicgui/shaders/rad_scaling_pass1.frag
-common/source2cpp.cpp: common/../basicgui/shaders/rad_scaling_pass2.vert
-common/source2cpp.cpp: common/../basicgui/shaders/rad_scaling_pass2.frag
-common/source2cpp.cpp: common/../gen/masks.cl
-common/source2cpp.cpp: common/../gen/synthesis.cl
+common/source2cpp.cpp: common/../tesselate/shaders/basic.vert
+common/source2cpp.cpp: common/../tesselate/shaders/basic.frag
+common/source2cpp.cpp: common/../tesselate/shaders/genNormal.vert
+common/source2cpp.cpp: common/../tesselate/shaders/genNormal.frag
+common/source2cpp.cpp: common/../tesselate/shaders/simple.vert
+common/source2cpp.cpp: common/../tesselate/shaders/simple.frag
+common/source2cpp.cpp: common/../tesselate/shaders/phong.vert
+common/source2cpp.cpp: common/../tesselate/shaders/phong.frag
+common/source2cpp.cpp: common/../tesselate/shaders/phongRS.vert
+common/source2cpp.cpp: common/../tesselate/shaders/phongRS.frag
+common/source2cpp.cpp: common/../tesselate/shaders/phongRSmanip.vert
+common/source2cpp.cpp: common/../tesselate/shaders/phongRSmanip.frag
+common/source2cpp.cpp: common/../tesselate/shaders/rad_scaling_pass1.vert
+common/source2cpp.cpp: common/../tesselate/shaders/rad_scaling_pass1.frag
+common/source2cpp.cpp: common/../tesselate/shaders/rad_scaling_pass2.vert
+common/source2cpp.cpp: common/../tesselate/shaders/rad_scaling_pass2.frag
 common/source2cpp.cpp: common/../clh/texmark.cl
 common/source2cpp.cpp: common/source2cpp.py
-	$(CMAKE_COMMAND) -E cmake_progress_report "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/CMakeFiles" $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Creating C++ source for shaders and kernels"
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common" && /usr/bin/python source2cpp.py ../basicgui/shaders/basic.vert ../basicgui/shaders/basic.frag ../basicgui/shaders/genNormal.vert ../basicgui/shaders/genNormal.frag ../basicgui/shaders/simple.vert ../basicgui/shaders/simple.frag ../basicgui/shaders/phong.vert ../basicgui/shaders/phong.frag ../basicgui/shaders/phongRS.vert ../basicgui/shaders/phongRS.frag ../basicgui/shaders/phongRSmanip.vert ../basicgui/shaders/phongRSmanip.frag ../basicgui/shaders/rad_scaling_pass1.vert ../basicgui/shaders/rad_scaling_pass1.frag ../basicgui/shaders/rad_scaling_pass2.vert ../basicgui/shaders/rad_scaling_pass2.frag ../gen/masks.cl ../gen/synthesis.cl ../clh/texmark.cl "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common/source2cpp.cpp"
-
-common/CMakeFiles/common.dir/initialize.cpp.o: common/CMakeFiles/common.dir/flags.make
-common/CMakeFiles/common.dir/initialize.cpp.o: common/initialize.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/CMakeFiles" $(CMAKE_PROGRESS_2)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object common/CMakeFiles/common.dir/initialize.cpp.o"
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common" && /opt/local/bin/gcc   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/common.dir/initialize.cpp.o -c "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common/initialize.cpp"
-
-common/CMakeFiles/common.dir/initialize.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/common.dir/initialize.cpp.i"
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common" && /opt/local/bin/gcc  $(CXX_DEFINES) $(CXX_FLAGS) -E "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common/initialize.cpp" > CMakeFiles/common.dir/initialize.cpp.i
-
-common/CMakeFiles/common.dir/initialize.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/common.dir/initialize.cpp.s"
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common" && /opt/local/bin/gcc  $(CXX_DEFINES) $(CXX_FLAGS) -S "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common/initialize.cpp" -o CMakeFiles/common.dir/initialize.cpp.s
-
-common/CMakeFiles/common.dir/initialize.cpp.o.requires:
-.PHONY : common/CMakeFiles/common.dir/initialize.cpp.o.requires
-
-common/CMakeFiles/common.dir/initialize.cpp.o.provides: common/CMakeFiles/common.dir/initialize.cpp.o.requires
-	$(MAKE) -f common/CMakeFiles/common.dir/build.make common/CMakeFiles/common.dir/initialize.cpp.o.provides.build
-.PHONY : common/CMakeFiles/common.dir/initialize.cpp.o.provides
-
-common/CMakeFiles/common.dir/initialize.cpp.o.provides.build: common/CMakeFiles/common.dir/initialize.cpp.o
-
-common/CMakeFiles/common.dir/map.cpp.o: common/CMakeFiles/common.dir/flags.make
-common/CMakeFiles/common.dir/map.cpp.o: common/map.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/CMakeFiles" $(CMAKE_PROGRESS_3)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object common/CMakeFiles/common.dir/map.cpp.o"
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common" && /opt/local/bin/gcc   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/common.dir/map.cpp.o -c "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common/map.cpp"
-
-common/CMakeFiles/common.dir/map.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/common.dir/map.cpp.i"
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common" && /opt/local/bin/gcc  $(CXX_DEFINES) $(CXX_FLAGS) -E "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common/map.cpp" > CMakeFiles/common.dir/map.cpp.i
-
-common/CMakeFiles/common.dir/map.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/common.dir/map.cpp.s"
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common" && /opt/local/bin/gcc  $(CXX_DEFINES) $(CXX_FLAGS) -S "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common/map.cpp" -o CMakeFiles/common.dir/map.cpp.s
-
-common/CMakeFiles/common.dir/map.cpp.o.requires:
-.PHONY : common/CMakeFiles/common.dir/map.cpp.o.requires
-
-common/CMakeFiles/common.dir/map.cpp.o.provides: common/CMakeFiles/common.dir/map.cpp.o.requires
-	$(MAKE) -f common/CMakeFiles/common.dir/build.make common/CMakeFiles/common.dir/map.cpp.o.provides.build
-.PHONY : common/CMakeFiles/common.dir/map.cpp.o.provides
-
-common/CMakeFiles/common.dir/map.cpp.o.provides.build: common/CMakeFiles/common.dir/map.cpp.o
-
-common/CMakeFiles/common.dir/maputils.cpp.o: common/CMakeFiles/common.dir/flags.make
-common/CMakeFiles/common.dir/maputils.cpp.o: common/maputils.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/CMakeFiles" $(CMAKE_PROGRESS_4)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object common/CMakeFiles/common.dir/maputils.cpp.o"
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common" && /opt/local/bin/gcc   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/common.dir/maputils.cpp.o -c "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common/maputils.cpp"
-
-common/CMakeFiles/common.dir/maputils.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/common.dir/maputils.cpp.i"
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common" && /opt/local/bin/gcc  $(CXX_DEFINES) $(CXX_FLAGS) -E "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common/maputils.cpp" > CMakeFiles/common.dir/maputils.cpp.i
-
-common/CMakeFiles/common.dir/maputils.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/common.dir/maputils.cpp.s"
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common" && /opt/local/bin/gcc  $(CXX_DEFINES) $(CXX_FLAGS) -S "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common/maputils.cpp" -o CMakeFiles/common.dir/maputils.cpp.s
-
-common/CMakeFiles/common.dir/maputils.cpp.o.requires:
-.PHONY : common/CMakeFiles/common.dir/maputils.cpp.o.requires
-
-common/CMakeFiles/common.dir/maputils.cpp.o.provides: common/CMakeFiles/common.dir/maputils.cpp.o.requires
-	$(MAKE) -f common/CMakeFiles/common.dir/build.make common/CMakeFiles/common.dir/maputils.cpp.o.provides.build
-.PHONY : common/CMakeFiles/common.dir/maputils.cpp.o.provides
-
-common/CMakeFiles/common.dir/maputils.cpp.o.provides.build: common/CMakeFiles/common.dir/maputils.cpp.o
-
-common/CMakeFiles/common.dir/mathutils.cpp.o: common/CMakeFiles/common.dir/flags.make
-common/CMakeFiles/common.dir/mathutils.cpp.o: common/mathutils.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/CMakeFiles" $(CMAKE_PROGRESS_5)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object common/CMakeFiles/common.dir/mathutils.cpp.o"
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common" && /opt/local/bin/gcc   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/common.dir/mathutils.cpp.o -c "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common/mathutils.cpp"
-
-common/CMakeFiles/common.dir/mathutils.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/common.dir/mathutils.cpp.i"
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common" && /opt/local/bin/gcc  $(CXX_DEFINES) $(CXX_FLAGS) -E "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common/mathutils.cpp" > CMakeFiles/common.dir/mathutils.cpp.i
-
-common/CMakeFiles/common.dir/mathutils.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/common.dir/mathutils.cpp.s"
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common" && /opt/local/bin/gcc  $(CXX_DEFINES) $(CXX_FLAGS) -S "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common/mathutils.cpp" -o CMakeFiles/common.dir/mathutils.cpp.s
-
-common/CMakeFiles/common.dir/mathutils.cpp.o.requires:
-.PHONY : common/CMakeFiles/common.dir/mathutils.cpp.o.requires
-
-common/CMakeFiles/common.dir/mathutils.cpp.o.provides: common/CMakeFiles/common.dir/mathutils.cpp.o.requires
-	$(MAKE) -f common/CMakeFiles/common.dir/build.make common/CMakeFiles/common.dir/mathutils.cpp.o.provides.build
-.PHONY : common/CMakeFiles/common.dir/mathutils.cpp.o.provides
-
-common/CMakeFiles/common.dir/mathutils.cpp.o.provides.build: common/CMakeFiles/common.dir/mathutils.cpp.o
-
-common/CMakeFiles/common.dir/obj.cpp.o: common/CMakeFiles/common.dir/flags.make
-common/CMakeFiles/common.dir/obj.cpp.o: common/obj.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/CMakeFiles" $(CMAKE_PROGRESS_6)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object common/CMakeFiles/common.dir/obj.cpp.o"
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common" && /opt/local/bin/gcc   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/common.dir/obj.cpp.o -c "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common/obj.cpp"
-
-common/CMakeFiles/common.dir/obj.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/common.dir/obj.cpp.i"
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common" && /opt/local/bin/gcc  $(CXX_DEFINES) $(CXX_FLAGS) -E "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common/obj.cpp" > CMakeFiles/common.dir/obj.cpp.i
-
-common/CMakeFiles/common.dir/obj.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/common.dir/obj.cpp.s"
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common" && /opt/local/bin/gcc  $(CXX_DEFINES) $(CXX_FLAGS) -S "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common/obj.cpp" -o CMakeFiles/common.dir/obj.cpp.s
-
-common/CMakeFiles/common.dir/obj.cpp.o.requires:
-.PHONY : common/CMakeFiles/common.dir/obj.cpp.o.requires
-
-common/CMakeFiles/common.dir/obj.cpp.o.provides: common/CMakeFiles/common.dir/obj.cpp.o.requires
-	$(MAKE) -f common/CMakeFiles/common.dir/build.make common/CMakeFiles/common.dir/obj.cpp.o.provides.build
-.PHONY : common/CMakeFiles/common.dir/obj.cpp.o.provides
-
-common/CMakeFiles/common.dir/obj.cpp.o.provides.build: common/CMakeFiles/common.dir/obj.cpp.o
-
-common/CMakeFiles/common.dir/progress.cpp.o: common/CMakeFiles/common.dir/flags.make
-common/CMakeFiles/common.dir/progress.cpp.o: common/progress.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/CMakeFiles" $(CMAKE_PROGRESS_7)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object common/CMakeFiles/common.dir/progress.cpp.o"
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common" && /opt/local/bin/gcc   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/common.dir/progress.cpp.o -c "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common/progress.cpp"
-
-common/CMakeFiles/common.dir/progress.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/common.dir/progress.cpp.i"
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common" && /opt/local/bin/gcc  $(CXX_DEFINES) $(CXX_FLAGS) -E "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common/progress.cpp" > CMakeFiles/common.dir/progress.cpp.i
-
-common/CMakeFiles/common.dir/progress.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/common.dir/progress.cpp.s"
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common" && /opt/local/bin/gcc  $(CXX_DEFINES) $(CXX_FLAGS) -S "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common/progress.cpp" -o CMakeFiles/common.dir/progress.cpp.s
-
-common/CMakeFiles/common.dir/progress.cpp.o.requires:
-.PHONY : common/CMakeFiles/common.dir/progress.cpp.o.requires
-
-common/CMakeFiles/common.dir/progress.cpp.o.provides: common/CMakeFiles/common.dir/progress.cpp.o.requires
-	$(MAKE) -f common/CMakeFiles/common.dir/build.make common/CMakeFiles/common.dir/progress.cpp.o.provides.build
-.PHONY : common/CMakeFiles/common.dir/progress.cpp.o.provides
-
-common/CMakeFiles/common.dir/progress.cpp.o.provides.build: common/CMakeFiles/common.dir/progress.cpp.o
-
-common/CMakeFiles/common.dir/region.cpp.o: common/CMakeFiles/common.dir/flags.make
-common/CMakeFiles/common.dir/region.cpp.o: common/region.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/CMakeFiles" $(CMAKE_PROGRESS_8)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object common/CMakeFiles/common.dir/region.cpp.o"
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common" && /opt/local/bin/gcc   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/common.dir/region.cpp.o -c "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common/region.cpp"
-
-common/CMakeFiles/common.dir/region.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/common.dir/region.cpp.i"
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common" && /opt/local/bin/gcc  $(CXX_DEFINES) $(CXX_FLAGS) -E "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common/region.cpp" > CMakeFiles/common.dir/region.cpp.i
-
-common/CMakeFiles/common.dir/region.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/common.dir/region.cpp.s"
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common" && /opt/local/bin/gcc  $(CXX_DEFINES) $(CXX_FLAGS) -S "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common/region.cpp" -o CMakeFiles/common.dir/region.cpp.s
-
-common/CMakeFiles/common.dir/region.cpp.o.requires:
-.PHONY : common/CMakeFiles/common.dir/region.cpp.o.requires
-
-common/CMakeFiles/common.dir/region.cpp.o.provides: common/CMakeFiles/common.dir/region.cpp.o.requires
-	$(MAKE) -f common/CMakeFiles/common.dir/build.make common/CMakeFiles/common.dir/region.cpp.o.provides.build
-.PHONY : common/CMakeFiles/common.dir/region.cpp.o.provides
-
-common/CMakeFiles/common.dir/region.cpp.o.provides.build: common/CMakeFiles/common.dir/region.cpp.o
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep/common && /usr/bin/python source2cpp.py ../tesselate/shaders/basic.vert ../tesselate/shaders/basic.frag ../tesselate/shaders/genNormal.vert ../tesselate/shaders/genNormal.frag ../tesselate/shaders/simple.vert ../tesselate/shaders/simple.frag ../tesselate/shaders/phong.vert ../tesselate/shaders/phong.frag ../tesselate/shaders/phongRS.vert ../tesselate/shaders/phongRS.frag ../tesselate/shaders/phongRSmanip.vert ../tesselate/shaders/phongRSmanip.frag ../tesselate/shaders/rad_scaling_pass1.vert ../tesselate/shaders/rad_scaling_pass1.frag ../tesselate/shaders/rad_scaling_pass2.vert ../tesselate/shaders/rad_scaling_pass2.frag ../clh/texmark.cl /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep/common/source2cpp.cpp
 
 common/CMakeFiles/common.dir/stats.cpp.o: common/CMakeFiles/common.dir/flags.make
 common/CMakeFiles/common.dir/stats.cpp.o: common/stats.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/CMakeFiles" $(CMAKE_PROGRESS_9)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object common/CMakeFiles/common.dir/stats.cpp.o"
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common" && /opt/local/bin/gcc   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/common.dir/stats.cpp.o -c "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common/stats.cpp"
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep/common && /usr/bin/g++-4.8   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/common.dir/stats.cpp.o -c /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep/common/stats.cpp
 
 common/CMakeFiles/common.dir/stats.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/common.dir/stats.cpp.i"
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common" && /opt/local/bin/gcc  $(CXX_DEFINES) $(CXX_FLAGS) -E "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common/stats.cpp" > CMakeFiles/common.dir/stats.cpp.i
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep/common && /usr/bin/g++-4.8  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep/common/stats.cpp > CMakeFiles/common.dir/stats.cpp.i
 
 common/CMakeFiles/common.dir/stats.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/common.dir/stats.cpp.s"
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common" && /opt/local/bin/gcc  $(CXX_DEFINES) $(CXX_FLAGS) -S "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common/stats.cpp" -o CMakeFiles/common.dir/stats.cpp.s
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep/common && /usr/bin/g++-4.8  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep/common/stats.cpp -o CMakeFiles/common.dir/stats.cpp.s
 
 common/CMakeFiles/common.dir/stats.cpp.o.requires:
 .PHONY : common/CMakeFiles/common.dir/stats.cpp.o.requires
@@ -260,42 +94,19 @@ common/CMakeFiles/common.dir/stats.cpp.o.provides: common/CMakeFiles/common.dir/
 
 common/CMakeFiles/common.dir/stats.cpp.o.provides.build: common/CMakeFiles/common.dir/stats.cpp.o
 
-common/CMakeFiles/common.dir/terragen.cpp.o: common/CMakeFiles/common.dir/flags.make
-common/CMakeFiles/common.dir/terragen.cpp.o: common/terragen.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/CMakeFiles" $(CMAKE_PROGRESS_10)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object common/CMakeFiles/common.dir/terragen.cpp.o"
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common" && /opt/local/bin/gcc   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/common.dir/terragen.cpp.o -c "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common/terragen.cpp"
-
-common/CMakeFiles/common.dir/terragen.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/common.dir/terragen.cpp.i"
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common" && /opt/local/bin/gcc  $(CXX_DEFINES) $(CXX_FLAGS) -E "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common/terragen.cpp" > CMakeFiles/common.dir/terragen.cpp.i
-
-common/CMakeFiles/common.dir/terragen.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/common.dir/terragen.cpp.s"
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common" && /opt/local/bin/gcc  $(CXX_DEFINES) $(CXX_FLAGS) -S "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common/terragen.cpp" -o CMakeFiles/common.dir/terragen.cpp.s
-
-common/CMakeFiles/common.dir/terragen.cpp.o.requires:
-.PHONY : common/CMakeFiles/common.dir/terragen.cpp.o.requires
-
-common/CMakeFiles/common.dir/terragen.cpp.o.provides: common/CMakeFiles/common.dir/terragen.cpp.o.requires
-	$(MAKE) -f common/CMakeFiles/common.dir/build.make common/CMakeFiles/common.dir/terragen.cpp.o.provides.build
-.PHONY : common/CMakeFiles/common.dir/terragen.cpp.o.provides
-
-common/CMakeFiles/common.dir/terragen.cpp.o.provides.build: common/CMakeFiles/common.dir/terragen.cpp.o
-
 common/CMakeFiles/common.dir/timer.cpp.o: common/CMakeFiles/common.dir/flags.make
 common/CMakeFiles/common.dir/timer.cpp.o: common/timer.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/CMakeFiles" $(CMAKE_PROGRESS_11)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object common/CMakeFiles/common.dir/timer.cpp.o"
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common" && /opt/local/bin/gcc   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/common.dir/timer.cpp.o -c "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common/timer.cpp"
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep/common && /usr/bin/g++-4.8   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/common.dir/timer.cpp.o -c /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep/common/timer.cpp
 
 common/CMakeFiles/common.dir/timer.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/common.dir/timer.cpp.i"
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common" && /opt/local/bin/gcc  $(CXX_DEFINES) $(CXX_FLAGS) -E "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common/timer.cpp" > CMakeFiles/common.dir/timer.cpp.i
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep/common && /usr/bin/g++-4.8  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep/common/timer.cpp > CMakeFiles/common.dir/timer.cpp.i
 
 common/CMakeFiles/common.dir/timer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/common.dir/timer.cpp.s"
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common" && /opt/local/bin/gcc  $(CXX_DEFINES) $(CXX_FLAGS) -S "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common/timer.cpp" -o CMakeFiles/common.dir/timer.cpp.s
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep/common && /usr/bin/g++-4.8  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep/common/timer.cpp -o CMakeFiles/common.dir/timer.cpp.s
 
 common/CMakeFiles/common.dir/timer.cpp.o.requires:
 .PHONY : common/CMakeFiles/common.dir/timer.cpp.o.requires
@@ -308,17 +119,17 @@ common/CMakeFiles/common.dir/timer.cpp.o.provides.build: common/CMakeFiles/commo
 
 common/CMakeFiles/common.dir/source2cpp.cpp.o: common/CMakeFiles/common.dir/flags.make
 common/CMakeFiles/common.dir/source2cpp.cpp.o: common/source2cpp.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/CMakeFiles" $(CMAKE_PROGRESS_12)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object common/CMakeFiles/common.dir/source2cpp.cpp.o"
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common" && /opt/local/bin/gcc   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/common.dir/source2cpp.cpp.o -c "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common/source2cpp.cpp"
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep/common && /usr/bin/g++-4.8   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/common.dir/source2cpp.cpp.o -c /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep/common/source2cpp.cpp
 
 common/CMakeFiles/common.dir/source2cpp.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/common.dir/source2cpp.cpp.i"
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common" && /opt/local/bin/gcc  $(CXX_DEFINES) $(CXX_FLAGS) -E "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common/source2cpp.cpp" > CMakeFiles/common.dir/source2cpp.cpp.i
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep/common && /usr/bin/g++-4.8  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep/common/source2cpp.cpp > CMakeFiles/common.dir/source2cpp.cpp.i
 
 common/CMakeFiles/common.dir/source2cpp.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/common.dir/source2cpp.cpp.s"
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common" && /opt/local/bin/gcc  $(CXX_DEFINES) $(CXX_FLAGS) -S "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common/source2cpp.cpp" -o CMakeFiles/common.dir/source2cpp.cpp.s
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep/common && /usr/bin/g++-4.8  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep/common/source2cpp.cpp -o CMakeFiles/common.dir/source2cpp.cpp.s
 
 common/CMakeFiles/common.dir/source2cpp.cpp.o.requires:
 .PHONY : common/CMakeFiles/common.dir/source2cpp.cpp.o.requires
@@ -331,60 +142,36 @@ common/CMakeFiles/common.dir/source2cpp.cpp.o.provides.build: common/CMakeFiles/
 
 # Object files for target common
 common_OBJECTS = \
-"CMakeFiles/common.dir/initialize.cpp.o" \
-"CMakeFiles/common.dir/map.cpp.o" \
-"CMakeFiles/common.dir/maputils.cpp.o" \
-"CMakeFiles/common.dir/mathutils.cpp.o" \
-"CMakeFiles/common.dir/obj.cpp.o" \
-"CMakeFiles/common.dir/progress.cpp.o" \
-"CMakeFiles/common.dir/region.cpp.o" \
 "CMakeFiles/common.dir/stats.cpp.o" \
-"CMakeFiles/common.dir/terragen.cpp.o" \
 "CMakeFiles/common.dir/timer.cpp.o" \
 "CMakeFiles/common.dir/source2cpp.cpp.o"
 
 # External object files for target common
 common_EXTERNAL_OBJECTS =
 
-common/libcommon.a: common/CMakeFiles/common.dir/initialize.cpp.o
-common/libcommon.a: common/CMakeFiles/common.dir/map.cpp.o
-common/libcommon.a: common/CMakeFiles/common.dir/maputils.cpp.o
-common/libcommon.a: common/CMakeFiles/common.dir/mathutils.cpp.o
-common/libcommon.a: common/CMakeFiles/common.dir/obj.cpp.o
-common/libcommon.a: common/CMakeFiles/common.dir/progress.cpp.o
-common/libcommon.a: common/CMakeFiles/common.dir/region.cpp.o
 common/libcommon.a: common/CMakeFiles/common.dir/stats.cpp.o
-common/libcommon.a: common/CMakeFiles/common.dir/terragen.cpp.o
 common/libcommon.a: common/CMakeFiles/common.dir/timer.cpp.o
 common/libcommon.a: common/CMakeFiles/common.dir/source2cpp.cpp.o
 common/libcommon.a: common/CMakeFiles/common.dir/build.make
 common/libcommon.a: common/CMakeFiles/common.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX static library libcommon.a"
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common" && $(CMAKE_COMMAND) -P CMakeFiles/common.dir/cmake_clean_target.cmake
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common" && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/common.dir/link.txt --verbose=$(VERBOSE)
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep/common && $(CMAKE_COMMAND) -P CMakeFiles/common.dir/cmake_clean_target.cmake
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep/common && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/common.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 common/CMakeFiles/common.dir/build: common/libcommon.a
 .PHONY : common/CMakeFiles/common.dir/build
 
-common/CMakeFiles/common.dir/requires: common/CMakeFiles/common.dir/initialize.cpp.o.requires
-common/CMakeFiles/common.dir/requires: common/CMakeFiles/common.dir/map.cpp.o.requires
-common/CMakeFiles/common.dir/requires: common/CMakeFiles/common.dir/maputils.cpp.o.requires
-common/CMakeFiles/common.dir/requires: common/CMakeFiles/common.dir/mathutils.cpp.o.requires
-common/CMakeFiles/common.dir/requires: common/CMakeFiles/common.dir/obj.cpp.o.requires
-common/CMakeFiles/common.dir/requires: common/CMakeFiles/common.dir/progress.cpp.o.requires
-common/CMakeFiles/common.dir/requires: common/CMakeFiles/common.dir/region.cpp.o.requires
 common/CMakeFiles/common.dir/requires: common/CMakeFiles/common.dir/stats.cpp.o.requires
-common/CMakeFiles/common.dir/requires: common/CMakeFiles/common.dir/terragen.cpp.o.requires
 common/CMakeFiles/common.dir/requires: common/CMakeFiles/common.dir/timer.cpp.o.requires
 common/CMakeFiles/common.dir/requires: common/CMakeFiles/common.dir/source2cpp.cpp.o.requires
 .PHONY : common/CMakeFiles/common.dir/requires
 
 common/CMakeFiles/common.dir/clean:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common" && $(CMAKE_COMMAND) -P CMakeFiles/common.dir/cmake_clean.cmake
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep/common && $(CMAKE_COMMAND) -P CMakeFiles/common.dir/cmake_clean.cmake
 .PHONY : common/CMakeFiles/common.dir/clean
 
 common/CMakeFiles/common.dir/depend: common/source2cpp.cpp
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common" "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common" "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/common/CMakeFiles/common.dir/DependInfo.cmake" --color=$(COLOR)
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep/common /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep/common /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep/common/CMakeFiles/common.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : common/CMakeFiles/common.dir/depend
 

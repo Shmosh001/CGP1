@@ -26,22 +26,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /opt/local/bin/cmake
+CMAKE_COMMAND = /usr/bin/cmake
 
 # The command to remove a file.
-RM = /opt/local/bin/cmake -E remove -f
+RM = /usr/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
-# The program to use to edit the cache.
-CMAKE_EDIT_COMMAND = /opt/local/bin/ccmake
-
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts"
+CMAKE_SOURCE_DIR = /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts"
+CMAKE_BINARY_DIR = /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep
 
 # Utility rule file for doc.
 
@@ -50,20 +47,13 @@ include CMakeFiles/doc.dir/progress.make
 
 CMakeFiles/doc: doc/html/index.html
 
-doc/html/index.html: basicgui/*
-doc/html/index.html: clh/*
 doc/html/index.html: common/*
-doc/html/index.html: gen/*
+doc/html/index.html: tesselate/*
 doc/html/index.html: test/*
-doc/html/index.html: test/basicgui/*
-doc/html/index.html: test/clh/*
-doc/html/index.html: test/common/*
-doc/html/index.html: test/gen/*
-doc/html/index.html: ueval/*
 doc/html/index.html: Doxyfile
-	$(CMAKE_COMMAND) -E cmake_progress_report "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/CMakeFiles" $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating API documentation"
-	/usr/local/bin/doxygen "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/Doxyfile"
+	/usr/bin/doxygen /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep/Doxyfile
 
 doc: CMakeFiles/doc
 doc: doc/html/index.html
@@ -79,6 +69,6 @@ CMakeFiles/doc.dir/clean:
 .PHONY : CMakeFiles/doc.dir/clean
 
 CMakeFiles/doc.dir/depend:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/CMakeFiles/doc.dir/DependInfo.cmake" --color=$(COLOR)
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep/CMakeFiles/doc.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/doc.dir/depend
 

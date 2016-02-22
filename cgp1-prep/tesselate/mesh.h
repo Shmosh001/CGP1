@@ -61,6 +61,7 @@ private:
     std::vector<cgp::Point> verts; ///< vertices of the tesselation structure
     std::vector<cgp::Vector> norms;  ///< per vertex normals
     std::vector<Triangle> tris; ///< edges connecting vertices
+    std::vector<Edge> edges; ///< edge list
     GLfloat * col;              ///< (r,g,b,a) colour
     float scale;                ///< scaling factor
     cgp::Vector trx;                 ///< translation
@@ -85,6 +86,7 @@ private:
      * @retval false otherwise
      */
     bool findEdge(vector<Edge> edges, Edge e, int &idx);
+    bool findEdgeCustom(vector<Edge> edges, Edge e);
 
     /**
      * Construct a hash key based on a 3D point

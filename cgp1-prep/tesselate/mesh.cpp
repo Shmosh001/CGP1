@@ -73,6 +73,23 @@ bool Mesh::findEdge(vector<Edge> edges, Edge e, int &idx)
     return found;
 }
 
+bool Mesh::findEdgeCustom(vector<Edge> edges, Edge e)
+{
+    bool found = false;
+    int i = 0;
+
+    // linear search of edge list
+    while(!found && i < (int) edges.size())
+    {
+        if( (edges[i].v[0] == e.v[0] && edges[i].v[1] == e.v[1]) || (edges[i].v[1] == e.v[0] && edges[i].v[0] == e.v[1]) )
+        {
+            found = true;
+        }
+        i++;
+    }
+    return found;
+}
+
 long Mesh::hashVert(cgp::Point pnt, cgp::BoundBox bbox)
 {
     long x, y, z;
@@ -443,6 +460,97 @@ bool Mesh::writeSTL(string filename)
 bool Mesh::basicValidity()
 {
     // stub, needs completing
+
+    int vert0 = tris[0].v[0];
+    int vert1 = tris[0].v[1];
+    int vert2 = tris[0].v[2];
+
+    //creating 3 edges
+    Edge temp0;
+    temp0.v[0] = vert0;
+    temp0.v[1] = vert1;
+
+    Edge temp1;
+    temp1.v[0] = vert1;
+    temp1.v[1] = vert2;
+
+    Edge temp2;
+    temp2.v[0] = vert2;
+    temp2.v[1] = vert0;
+
+    //adding initial triangle edges to edge list
+    edges.push_back(temp0);
+    edges.push_back(temp1);
+    edges.push_back(temp2);
+
+
+    int numt = (int) tris.size();   //size of triangle list
+    for (int x = 1; x < numt; x++)  //loop through each triangle to get vectices
+    {
+        int vert0 = tris[x].v[0];
+        int vert1 = tris[x].v[1];
+        int vert2 = tris[x].v[2];
+
+        //creating 3 edges
+        Edge temp0;
+        temp0.v[0] = vert0;
+        temp0.v[1] = vert1;
+
+        Edge temp1;
+        temp1.v[0] = vert1;
+        temp1.v[1] = vert2;
+
+        Edge temp2;
+        temp2.v[0] = vert2;
+        temp2.v[1] = vert0;
+
+        //check if edges list contains edge. if not add it
+        if(findEdgeCustom(edges, temp0) == false)
+        {
+            edges.push_back(temp0);
+        }
+
+        //check if edges list contains edge. if not add it
+        if(findEdgeCustom(edges, temp1) == false)
+        {
+            edges.push_back(temp1);
+        }
+
+        //check if edges list contains edge. if not add it
+        if(findEdgeCustom(edges, temp2) == false)
+        {
+            edges.push_back(temp2);
+        }
+
+    }
+
+     cerr << "clean edges = " << edges.size() << endl;
+
+
+     bool isDangling = false;
+     int count = edges.size();
+     for(int i = 0; i < edges.size())
+     {
+        for (int j = 0; j < tris.size(); j++)
+        {
+            if(edges[i] == tris[j].v[0] || edges[i] == tris[j].v[1] || edges[i] == tris[j].v[2])
+            {
+                count--;
+            }
+        }
+     }
+
+     if(count == 0)
+     {
+        isDangling = true;
+     }
+
+     cerr << "dangling vertices = " << count << endl;
+
+
+
+     //V – E + F = 2 – 2G
+
     return true;
 }
 

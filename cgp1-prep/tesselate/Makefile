@@ -30,30 +30,27 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /opt/local/bin/cmake
+CMAKE_COMMAND = /usr/bin/cmake
 
 # The command to remove a file.
-RM = /opt/local/bin/cmake -E remove -f
+RM = /usr/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
-# The program to use to edit the cache.
-CMAKE_EDIT_COMMAND = /opt/local/bin/ccmake
-
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts"
+CMAKE_SOURCE_DIR = /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts"
+CMAKE_BINARY_DIR = /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep
 
 #=============================================================================
 # Targets provided globally by CMake.
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/opt/local/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running interactive CMake command-line interface..."
+	/usr/bin/cmake -i .
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -63,7 +60,7 @@ edit_cache/fast: edit_cache
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/opt/local/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -73,7 +70,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target test
 test:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
-	/opt/local/bin/ctest --force-new-ctest-process $(ARGS)
+	/usr/bin/ctest --force-new-ctest-process $(ARGS)
 .PHONY : test
 
 # Special rule for the target test
@@ -82,14 +79,14 @@ test/fast: test
 
 # The main all target
 all: cmake_check_build_system
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(CMAKE_COMMAND) -E cmake_progress_start "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/CMakeFiles" "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/basicgui/CMakeFiles/progress.marks"
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f CMakeFiles/Makefile2 basicgui/all
-	$(CMAKE_COMMAND) -E cmake_progress_start "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/CMakeFiles" 0
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(CMAKE_COMMAND) -E cmake_progress_start /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep/CMakeFiles /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep/tesselate/CMakeFiles/progress.marks
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f CMakeFiles/Makefile2 tesselate/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f CMakeFiles/Makefile2 basicgui/clean
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f CMakeFiles/Makefile2 tesselate/clean
 .PHONY : clean
 
 # The main clean target
@@ -98,153 +95,81 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f CMakeFiles/Makefile2 basicgui/preinstall
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f CMakeFiles/Makefile2 tesselate/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f CMakeFiles/Makefile2 basicgui/preinstall
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f CMakeFiles/Makefile2 tesselate/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
-basicgui/CMakeFiles/basicgui.dir/rule:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f CMakeFiles/Makefile2 basicgui/CMakeFiles/basicgui.dir/rule
-.PHONY : basicgui/CMakeFiles/basicgui.dir/rule
+tesselate/CMakeFiles/tess.dir/rule:
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f CMakeFiles/Makefile2 tesselate/CMakeFiles/tess.dir/rule
+.PHONY : tesselate/CMakeFiles/tess.dir/rule
 
 # Convenience name for target.
-basicgui: basicgui/CMakeFiles/basicgui.dir/rule
-.PHONY : basicgui
+tess: tesselate/CMakeFiles/tess.dir/rule
+.PHONY : tess
 
 # fast build rule for target.
-basicgui/fast:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/basicgui.dir/build.make basicgui/CMakeFiles/basicgui.dir/build
-.PHONY : basicgui/fast
+tess/fast:
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f tesselate/CMakeFiles/tess.dir/build.make tesselate/CMakeFiles/tess.dir/build
+.PHONY : tess/fast
 
 # Convenience name for target.
-basicgui/CMakeFiles/basicgui_automoc.dir/rule:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f CMakeFiles/Makefile2 basicgui/CMakeFiles/basicgui_automoc.dir/rule
-.PHONY : basicgui/CMakeFiles/basicgui_automoc.dir/rule
+tesselate/CMakeFiles/tess_automoc.dir/rule:
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f CMakeFiles/Makefile2 tesselate/CMakeFiles/tess_automoc.dir/rule
+.PHONY : tesselate/CMakeFiles/tess_automoc.dir/rule
 
 # Convenience name for target.
-basicgui_automoc: basicgui/CMakeFiles/basicgui_automoc.dir/rule
-.PHONY : basicgui_automoc
+tess_automoc: tesselate/CMakeFiles/tess_automoc.dir/rule
+.PHONY : tess_automoc
 
 # fast build rule for target.
-basicgui_automoc/fast:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/basicgui_automoc.dir/build.make basicgui/CMakeFiles/basicgui_automoc.dir/build
-.PHONY : basicgui_automoc/fast
+tess_automoc/fast:
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f tesselate/CMakeFiles/tess_automoc.dir/build.make tesselate/CMakeFiles/tess_automoc.dir/build
+.PHONY : tess_automoc/fast
 
 # Convenience name for target.
-basicgui/CMakeFiles/gui.dir/rule:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f CMakeFiles/Makefile2 basicgui/CMakeFiles/gui.dir/rule
-.PHONY : basicgui/CMakeFiles/gui.dir/rule
+tesselate/CMakeFiles/tessviewer.dir/rule:
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f CMakeFiles/Makefile2 tesselate/CMakeFiles/tessviewer.dir/rule
+.PHONY : tesselate/CMakeFiles/tessviewer.dir/rule
 
 # Convenience name for target.
-gui: basicgui/CMakeFiles/gui.dir/rule
-.PHONY : gui
+tessviewer: tesselate/CMakeFiles/tessviewer.dir/rule
+.PHONY : tessviewer
 
 # fast build rule for target.
-gui/fast:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/build
-.PHONY : gui/fast
+tessviewer/fast:
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f tesselate/CMakeFiles/tessviewer.dir/build.make tesselate/CMakeFiles/tessviewer.dir/build
+.PHONY : tessviewer/fast
 
 # Convenience name for target.
-basicgui/CMakeFiles/gui_automoc.dir/rule:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f CMakeFiles/Makefile2 basicgui/CMakeFiles/gui_automoc.dir/rule
-.PHONY : basicgui/CMakeFiles/gui_automoc.dir/rule
+tesselate/CMakeFiles/tessviewer_automoc.dir/rule:
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f CMakeFiles/Makefile2 tesselate/CMakeFiles/tessviewer_automoc.dir/rule
+.PHONY : tesselate/CMakeFiles/tessviewer_automoc.dir/rule
 
 # Convenience name for target.
-gui_automoc: basicgui/CMakeFiles/gui_automoc.dir/rule
-.PHONY : gui_automoc
+tessviewer_automoc: tesselate/CMakeFiles/tessviewer_automoc.dir/rule
+.PHONY : tessviewer_automoc
 
 # fast build rule for target.
-gui_automoc/fast:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui_automoc.dir/build.make basicgui/CMakeFiles/gui_automoc.dir/build
-.PHONY : gui_automoc/fast
-
-basicgui_automoc.o: basicgui_automoc.cpp.o
-.PHONY : basicgui_automoc.o
-
-# target to build an object file
-basicgui_automoc.cpp.o:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/basicgui.dir/build.make basicgui/CMakeFiles/basicgui.dir/basicgui_automoc.cpp.o
-.PHONY : basicgui_automoc.cpp.o
-
-basicgui_automoc.i: basicgui_automoc.cpp.i
-.PHONY : basicgui_automoc.i
-
-# target to preprocess a source file
-basicgui_automoc.cpp.i:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/basicgui.dir/build.make basicgui/CMakeFiles/basicgui.dir/basicgui_automoc.cpp.i
-.PHONY : basicgui_automoc.cpp.i
-
-basicgui_automoc.s: basicgui_automoc.cpp.s
-.PHONY : basicgui_automoc.s
-
-# target to generate assembly for a file
-basicgui_automoc.cpp.s:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/basicgui.dir/build.make basicgui/CMakeFiles/basicgui.dir/basicgui_automoc.cpp.s
-.PHONY : basicgui_automoc.cpp.s
-
-constraint.o: constraint.cpp.o
-.PHONY : constraint.o
-
-# target to build an object file
-constraint.cpp.o:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/constraint.cpp.o
-.PHONY : constraint.cpp.o
-
-constraint.i: constraint.cpp.i
-.PHONY : constraint.i
-
-# target to preprocess a source file
-constraint.cpp.i:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/constraint.cpp.i
-.PHONY : constraint.cpp.i
-
-constraint.s: constraint.cpp.s
-.PHONY : constraint.s
-
-# target to generate assembly for a file
-constraint.cpp.s:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/constraint.cpp.s
-.PHONY : constraint.cpp.s
-
-fill.o: fill.cpp.o
-.PHONY : fill.o
-
-# target to build an object file
-fill.cpp.o:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/fill.cpp.o
-.PHONY : fill.cpp.o
-
-fill.i: fill.cpp.i
-.PHONY : fill.i
-
-# target to preprocess a source file
-fill.cpp.i:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/fill.cpp.i
-.PHONY : fill.cpp.i
-
-fill.s: fill.cpp.s
-.PHONY : fill.s
-
-# target to generate assembly for a file
-fill.cpp.s:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/fill.cpp.s
-.PHONY : fill.cpp.s
+tessviewer_automoc/fast:
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f tesselate/CMakeFiles/tessviewer_automoc.dir/build.make tesselate/CMakeFiles/tessviewer_automoc.dir/build
+.PHONY : tessviewer_automoc/fast
 
 glwidget.o: glwidget.cpp.o
 .PHONY : glwidget.o
 
 # target to build an object file
 glwidget.cpp.o:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/glwidget.cpp.o
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f tesselate/CMakeFiles/tess.dir/build.make tesselate/CMakeFiles/tess.dir/glwidget.cpp.o
 .PHONY : glwidget.cpp.o
 
 glwidget.i: glwidget.cpp.i
@@ -252,7 +177,7 @@ glwidget.i: glwidget.cpp.i
 
 # target to preprocess a source file
 glwidget.cpp.i:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/glwidget.cpp.i
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f tesselate/CMakeFiles/tess.dir/build.make tesselate/CMakeFiles/tess.dir/glwidget.cpp.i
 .PHONY : glwidget.cpp.i
 
 glwidget.s: glwidget.cpp.s
@@ -260,39 +185,15 @@ glwidget.s: glwidget.cpp.s
 
 # target to generate assembly for a file
 glwidget.cpp.s:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/glwidget.cpp.s
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f tesselate/CMakeFiles/tess.dir/build.make tesselate/CMakeFiles/tess.dir/glwidget.cpp.s
 .PHONY : glwidget.cpp.s
-
-gui_automoc.o: gui_automoc.cpp.o
-.PHONY : gui_automoc.o
-
-# target to build an object file
-gui_automoc.cpp.o:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/gui_automoc.cpp.o
-.PHONY : gui_automoc.cpp.o
-
-gui_automoc.i: gui_automoc.cpp.i
-.PHONY : gui_automoc.i
-
-# target to preprocess a source file
-gui_automoc.cpp.i:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/gui_automoc.cpp.i
-.PHONY : gui_automoc.cpp.i
-
-gui_automoc.s: gui_automoc.cpp.s
-.PHONY : gui_automoc.s
-
-# target to generate assembly for a file
-gui_automoc.cpp.s:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/gui_automoc.cpp.s
-.PHONY : gui_automoc.cpp.s
 
 main.o: main.cpp.o
 .PHONY : main.o
 
 # target to build an object file
 main.cpp.o:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/basicgui.dir/build.make basicgui/CMakeFiles/basicgui.dir/main.cpp.o
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f tesselate/CMakeFiles/tessviewer.dir/build.make tesselate/CMakeFiles/tessviewer.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -300,7 +201,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/basicgui.dir/build.make basicgui/CMakeFiles/basicgui.dir/main.cpp.i
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f tesselate/CMakeFiles/tessviewer.dir/build.make tesselate/CMakeFiles/tessviewer.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -308,63 +209,63 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/basicgui.dir/build.make basicgui/CMakeFiles/basicgui.dir/main.cpp.s
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f tesselate/CMakeFiles/tessviewer.dir/build.make tesselate/CMakeFiles/tessviewer.dir/main.cpp.s
 .PHONY : main.cpp.s
 
-noise.o: noise.cpp.o
-.PHONY : noise.o
+mesh.o: mesh.cpp.o
+.PHONY : mesh.o
 
 # target to build an object file
-noise.cpp.o:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/noise.cpp.o
-.PHONY : noise.cpp.o
+mesh.cpp.o:
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f tesselate/CMakeFiles/tess.dir/build.make tesselate/CMakeFiles/tess.dir/mesh.cpp.o
+.PHONY : mesh.cpp.o
 
-noise.i: noise.cpp.i
-.PHONY : noise.i
+mesh.i: mesh.cpp.i
+.PHONY : mesh.i
 
 # target to preprocess a source file
-noise.cpp.i:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/noise.cpp.i
-.PHONY : noise.cpp.i
+mesh.cpp.i:
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f tesselate/CMakeFiles/tess.dir/build.make tesselate/CMakeFiles/tess.dir/mesh.cpp.i
+.PHONY : mesh.cpp.i
 
-noise.s: noise.cpp.s
-.PHONY : noise.s
+mesh.s: mesh.cpp.s
+.PHONY : mesh.s
 
 # target to generate assembly for a file
-noise.cpp.s:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/noise.cpp.s
-.PHONY : noise.cpp.s
+mesh.cpp.s:
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f tesselate/CMakeFiles/tess.dir/build.make tesselate/CMakeFiles/tess.dir/mesh.cpp.s
+.PHONY : mesh.cpp.s
 
-palette.o: palette.cpp.o
-.PHONY : palette.o
+renderer.o: renderer.cpp.o
+.PHONY : renderer.o
 
 # target to build an object file
-palette.cpp.o:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/palette.cpp.o
-.PHONY : palette.cpp.o
+renderer.cpp.o:
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f tesselate/CMakeFiles/tess.dir/build.make tesselate/CMakeFiles/tess.dir/renderer.cpp.o
+.PHONY : renderer.cpp.o
 
-palette.i: palette.cpp.i
-.PHONY : palette.i
+renderer.i: renderer.cpp.i
+.PHONY : renderer.i
 
 # target to preprocess a source file
-palette.cpp.i:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/palette.cpp.i
-.PHONY : palette.cpp.i
+renderer.cpp.i:
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f tesselate/CMakeFiles/tess.dir/build.make tesselate/CMakeFiles/tess.dir/renderer.cpp.i
+.PHONY : renderer.cpp.i
 
-palette.s: palette.cpp.s
-.PHONY : palette.s
+renderer.s: renderer.cpp.s
+.PHONY : renderer.s
 
 # target to generate assembly for a file
-palette.cpp.s:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/palette.cpp.s
-.PHONY : palette.cpp.s
+renderer.cpp.s:
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f tesselate/CMakeFiles/tess.dir/build.make tesselate/CMakeFiles/tess.dir/renderer.cpp.s
+.PHONY : renderer.cpp.s
 
 shaderProgram.o: shaderProgram.cpp.o
 .PHONY : shaderProgram.o
 
 # target to build an object file
 shaderProgram.cpp.o:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/shaderProgram.cpp.o
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f tesselate/CMakeFiles/tess.dir/build.make tesselate/CMakeFiles/tess.dir/shaderProgram.cpp.o
 .PHONY : shaderProgram.cpp.o
 
 shaderProgram.i: shaderProgram.cpp.i
@@ -372,7 +273,7 @@ shaderProgram.i: shaderProgram.cpp.i
 
 # target to preprocess a source file
 shaderProgram.cpp.i:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/shaderProgram.cpp.i
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f tesselate/CMakeFiles/tess.dir/build.make tesselate/CMakeFiles/tess.dir/shaderProgram.cpp.i
 .PHONY : shaderProgram.cpp.i
 
 shaderProgram.s: shaderProgram.cpp.s
@@ -380,7 +281,7 @@ shaderProgram.s: shaderProgram.cpp.s
 
 # target to generate assembly for a file
 shaderProgram.cpp.s:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/shaderProgram.cpp.s
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f tesselate/CMakeFiles/tess.dir/build.make tesselate/CMakeFiles/tess.dir/shaderProgram.cpp.s
 .PHONY : shaderProgram.cpp.s
 
 shape.o: shape.cpp.o
@@ -388,7 +289,7 @@ shape.o: shape.cpp.o
 
 # target to build an object file
 shape.cpp.o:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/shape.cpp.o
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f tesselate/CMakeFiles/tess.dir/build.make tesselate/CMakeFiles/tess.dir/shape.cpp.o
 .PHONY : shape.cpp.o
 
 shape.i: shape.cpp.i
@@ -396,7 +297,7 @@ shape.i: shape.cpp.i
 
 # target to preprocess a source file
 shape.cpp.i:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/shape.cpp.i
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f tesselate/CMakeFiles/tess.dir/build.make tesselate/CMakeFiles/tess.dir/shape.cpp.i
 .PHONY : shape.cpp.i
 
 shape.s: shape.cpp.s
@@ -404,87 +305,63 @@ shape.s: shape.cpp.s
 
 # target to generate assembly for a file
 shape.cpp.s:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/shape.cpp.s
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f tesselate/CMakeFiles/tess.dir/build.make tesselate/CMakeFiles/tess.dir/shape.cpp.s
 .PHONY : shape.cpp.s
 
-stroke.o: stroke.cpp.o
-.PHONY : stroke.o
+tess_automoc.o: tess_automoc.cpp.o
+.PHONY : tess_automoc.o
 
 # target to build an object file
-stroke.cpp.o:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/stroke.cpp.o
-.PHONY : stroke.cpp.o
+tess_automoc.cpp.o:
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f tesselate/CMakeFiles/tess.dir/build.make tesselate/CMakeFiles/tess.dir/tess_automoc.cpp.o
+.PHONY : tess_automoc.cpp.o
 
-stroke.i: stroke.cpp.i
-.PHONY : stroke.i
+tess_automoc.i: tess_automoc.cpp.i
+.PHONY : tess_automoc.i
 
 # target to preprocess a source file
-stroke.cpp.i:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/stroke.cpp.i
-.PHONY : stroke.cpp.i
+tess_automoc.cpp.i:
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f tesselate/CMakeFiles/tess.dir/build.make tesselate/CMakeFiles/tess.dir/tess_automoc.cpp.i
+.PHONY : tess_automoc.cpp.i
 
-stroke.s: stroke.cpp.s
-.PHONY : stroke.s
+tess_automoc.s: tess_automoc.cpp.s
+.PHONY : tess_automoc.s
 
 # target to generate assembly for a file
-stroke.cpp.s:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/stroke.cpp.s
-.PHONY : stroke.cpp.s
+tess_automoc.cpp.s:
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f tesselate/CMakeFiles/tess.dir/build.make tesselate/CMakeFiles/tess.dir/tess_automoc.cpp.s
+.PHONY : tess_automoc.cpp.s
 
-terrain.o: terrain.cpp.o
-.PHONY : terrain.o
+tessviewer_automoc.o: tessviewer_automoc.cpp.o
+.PHONY : tessviewer_automoc.o
 
 # target to build an object file
-terrain.cpp.o:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/terrain.cpp.o
-.PHONY : terrain.cpp.o
+tessviewer_automoc.cpp.o:
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f tesselate/CMakeFiles/tessviewer.dir/build.make tesselate/CMakeFiles/tessviewer.dir/tessviewer_automoc.cpp.o
+.PHONY : tessviewer_automoc.cpp.o
 
-terrain.i: terrain.cpp.i
-.PHONY : terrain.i
-
-# target to preprocess a source file
-terrain.cpp.i:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/terrain.cpp.i
-.PHONY : terrain.cpp.i
-
-terrain.s: terrain.cpp.s
-.PHONY : terrain.s
-
-# target to generate assembly for a file
-terrain.cpp.s:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/terrain.cpp.s
-.PHONY : terrain.cpp.s
-
-terraintabs.o: terraintabs.cpp.o
-.PHONY : terraintabs.o
-
-# target to build an object file
-terraintabs.cpp.o:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/terraintabs.cpp.o
-.PHONY : terraintabs.cpp.o
-
-terraintabs.i: terraintabs.cpp.i
-.PHONY : terraintabs.i
+tessviewer_automoc.i: tessviewer_automoc.cpp.i
+.PHONY : tessviewer_automoc.i
 
 # target to preprocess a source file
-terraintabs.cpp.i:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/terraintabs.cpp.i
-.PHONY : terraintabs.cpp.i
+tessviewer_automoc.cpp.i:
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f tesselate/CMakeFiles/tessviewer.dir/build.make tesselate/CMakeFiles/tessviewer.dir/tessviewer_automoc.cpp.i
+.PHONY : tessviewer_automoc.cpp.i
 
-terraintabs.s: terraintabs.cpp.s
-.PHONY : terraintabs.s
+tessviewer_automoc.s: tessviewer_automoc.cpp.s
+.PHONY : tessviewer_automoc.s
 
 # target to generate assembly for a file
-terraintabs.cpp.s:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/terraintabs.cpp.s
-.PHONY : terraintabs.cpp.s
+tessviewer_automoc.cpp.s:
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f tesselate/CMakeFiles/tessviewer.dir/build.make tesselate/CMakeFiles/tessviewer.dir/tessviewer_automoc.cpp.s
+.PHONY : tessviewer_automoc.cpp.s
 
 timer.o: timer.cpp.o
 .PHONY : timer.o
 
 # target to build an object file
 timer.cpp.o:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/timer.cpp.o
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f tesselate/CMakeFiles/tess.dir/build.make tesselate/CMakeFiles/tess.dir/timer.cpp.o
 .PHONY : timer.cpp.o
 
 timer.i: timer.cpp.i
@@ -492,7 +369,7 @@ timer.i: timer.cpp.i
 
 # target to preprocess a source file
 timer.cpp.i:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/timer.cpp.i
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f tesselate/CMakeFiles/tess.dir/build.make tesselate/CMakeFiles/tess.dir/timer.cpp.i
 .PHONY : timer.cpp.i
 
 timer.s: timer.cpp.s
@@ -500,63 +377,15 @@ timer.s: timer.cpp.s
 
 # target to generate assembly for a file
 timer.cpp.s:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/timer.cpp.s
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f tesselate/CMakeFiles/tess.dir/build.make tesselate/CMakeFiles/tess.dir/timer.cpp.s
 .PHONY : timer.cpp.s
-
-trenderer.o: trenderer.cpp.o
-.PHONY : trenderer.o
-
-# target to build an object file
-trenderer.cpp.o:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/trenderer.cpp.o
-.PHONY : trenderer.cpp.o
-
-trenderer.i: trenderer.cpp.i
-.PHONY : trenderer.i
-
-# target to preprocess a source file
-trenderer.cpp.i:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/trenderer.cpp.i
-.PHONY : trenderer.cpp.i
-
-trenderer.s: trenderer.cpp.s
-.PHONY : trenderer.s
-
-# target to generate assembly for a file
-trenderer.cpp.s:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/trenderer.cpp.s
-.PHONY : trenderer.cpp.s
-
-typemap.o: typemap.cpp.o
-.PHONY : typemap.o
-
-# target to build an object file
-typemap.cpp.o:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/typemap.cpp.o
-.PHONY : typemap.cpp.o
-
-typemap.i: typemap.cpp.i
-.PHONY : typemap.i
-
-# target to preprocess a source file
-typemap.cpp.i:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/typemap.cpp.i
-.PHONY : typemap.cpp.i
-
-typemap.s: typemap.cpp.s
-.PHONY : typemap.s
-
-# target to generate assembly for a file
-typemap.cpp.s:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/typemap.cpp.s
-.PHONY : typemap.cpp.s
 
 vecpnt.o: vecpnt.cpp.o
 .PHONY : vecpnt.o
 
 # target to build an object file
 vecpnt.cpp.o:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/vecpnt.cpp.o
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f tesselate/CMakeFiles/tess.dir/build.make tesselate/CMakeFiles/tess.dir/vecpnt.cpp.o
 .PHONY : vecpnt.cpp.o
 
 vecpnt.i: vecpnt.cpp.i
@@ -564,7 +393,7 @@ vecpnt.i: vecpnt.cpp.i
 
 # target to preprocess a source file
 vecpnt.cpp.i:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/vecpnt.cpp.i
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f tesselate/CMakeFiles/tess.dir/build.make tesselate/CMakeFiles/tess.dir/vecpnt.cpp.i
 .PHONY : vecpnt.cpp.i
 
 vecpnt.s: vecpnt.cpp.s
@@ -572,39 +401,15 @@ vecpnt.s: vecpnt.cpp.s
 
 # target to generate assembly for a file
 vecpnt.cpp.s:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/vecpnt.cpp.s
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f tesselate/CMakeFiles/tess.dir/build.make tesselate/CMakeFiles/tess.dir/vecpnt.cpp.s
 .PHONY : vecpnt.cpp.s
-
-verticalscrollarea.o: verticalscrollarea.cpp.o
-.PHONY : verticalscrollarea.o
-
-# target to build an object file
-verticalscrollarea.cpp.o:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/verticalscrollarea.cpp.o
-.PHONY : verticalscrollarea.cpp.o
-
-verticalscrollarea.i: verticalscrollarea.cpp.i
-.PHONY : verticalscrollarea.i
-
-# target to preprocess a source file
-verticalscrollarea.cpp.i:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/verticalscrollarea.cpp.i
-.PHONY : verticalscrollarea.cpp.i
-
-verticalscrollarea.s: verticalscrollarea.cpp.s
-.PHONY : verticalscrollarea.s
-
-# target to generate assembly for a file
-verticalscrollarea.cpp.s:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/verticalscrollarea.cpp.s
-.PHONY : verticalscrollarea.cpp.s
 
 view.o: view.cpp.o
 .PHONY : view.o
 
 # target to build an object file
 view.cpp.o:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/view.cpp.o
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f tesselate/CMakeFiles/tess.dir/build.make tesselate/CMakeFiles/tess.dir/view.cpp.o
 .PHONY : view.cpp.o
 
 view.i: view.cpp.i
@@ -612,7 +417,7 @@ view.i: view.cpp.i
 
 # target to preprocess a source file
 view.cpp.i:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/view.cpp.i
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f tesselate/CMakeFiles/tess.dir/build.make tesselate/CMakeFiles/tess.dir/view.cpp.i
 .PHONY : view.cpp.i
 
 view.s: view.cpp.s
@@ -620,7 +425,7 @@ view.s: view.cpp.s
 
 # target to generate assembly for a file
 view.cpp.s:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/view.cpp.s
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f tesselate/CMakeFiles/tess.dir/build.make tesselate/CMakeFiles/tess.dir/view.cpp.s
 .PHONY : view.cpp.s
 
 window.o: window.cpp.o
@@ -628,7 +433,7 @@ window.o: window.cpp.o
 
 # target to build an object file
 window.cpp.o:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/window.cpp.o
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f tesselate/CMakeFiles/tess.dir/build.make tesselate/CMakeFiles/tess.dir/window.cpp.o
 .PHONY : window.cpp.o
 
 window.i: window.cpp.i
@@ -636,7 +441,7 @@ window.i: window.cpp.i
 
 # target to preprocess a source file
 window.cpp.i:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/window.cpp.i
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f tesselate/CMakeFiles/tess.dir/build.make tesselate/CMakeFiles/tess.dir/window.cpp.i
 .PHONY : window.cpp.i
 
 window.s: window.cpp.s
@@ -644,7 +449,7 @@ window.s: window.cpp.s
 
 # target to generate assembly for a file
 window.cpp.s:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f basicgui/CMakeFiles/gui.dir/build.make basicgui/CMakeFiles/gui.dir/window.cpp.s
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(MAKE) -f tesselate/CMakeFiles/tess.dir/build.make tesselate/CMakeFiles/tess.dir/window.cpp.s
 .PHONY : window.cpp.s
 
 # Help Target
@@ -653,67 +458,43 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... basicgui"
-	@echo "... basicgui_automoc"
 	@echo "... edit_cache"
-	@echo "... gui"
-	@echo "... gui_automoc"
 	@echo "... rebuild_cache"
+	@echo "... tess"
+	@echo "... tess_automoc"
+	@echo "... tessviewer"
+	@echo "... tessviewer_automoc"
 	@echo "... test"
-	@echo "... basicgui_automoc.o"
-	@echo "... basicgui_automoc.i"
-	@echo "... basicgui_automoc.s"
-	@echo "... constraint.o"
-	@echo "... constraint.i"
-	@echo "... constraint.s"
-	@echo "... fill.o"
-	@echo "... fill.i"
-	@echo "... fill.s"
 	@echo "... glwidget.o"
 	@echo "... glwidget.i"
 	@echo "... glwidget.s"
-	@echo "... gui_automoc.o"
-	@echo "... gui_automoc.i"
-	@echo "... gui_automoc.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
-	@echo "... noise.o"
-	@echo "... noise.i"
-	@echo "... noise.s"
-	@echo "... palette.o"
-	@echo "... palette.i"
-	@echo "... palette.s"
+	@echo "... mesh.o"
+	@echo "... mesh.i"
+	@echo "... mesh.s"
+	@echo "... renderer.o"
+	@echo "... renderer.i"
+	@echo "... renderer.s"
 	@echo "... shaderProgram.o"
 	@echo "... shaderProgram.i"
 	@echo "... shaderProgram.s"
 	@echo "... shape.o"
 	@echo "... shape.i"
 	@echo "... shape.s"
-	@echo "... stroke.o"
-	@echo "... stroke.i"
-	@echo "... stroke.s"
-	@echo "... terrain.o"
-	@echo "... terrain.i"
-	@echo "... terrain.s"
-	@echo "... terraintabs.o"
-	@echo "... terraintabs.i"
-	@echo "... terraintabs.s"
+	@echo "... tess_automoc.o"
+	@echo "... tess_automoc.i"
+	@echo "... tess_automoc.s"
+	@echo "... tessviewer_automoc.o"
+	@echo "... tessviewer_automoc.i"
+	@echo "... tessviewer_automoc.s"
 	@echo "... timer.o"
 	@echo "... timer.i"
 	@echo "... timer.s"
-	@echo "... trenderer.o"
-	@echo "... trenderer.i"
-	@echo "... trenderer.s"
-	@echo "... typemap.o"
-	@echo "... typemap.i"
-	@echo "... typemap.s"
 	@echo "... vecpnt.o"
 	@echo "... vecpnt.i"
 	@echo "... vecpnt.s"
-	@echo "... verticalscrollarea.o"
-	@echo "... verticalscrollarea.i"
-	@echo "... verticalscrollarea.s"
 	@echo "... view.o"
 	@echo "... view.i"
 	@echo "... view.s"
@@ -731,6 +512,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/osher/Dropbox/Work/CGP/Assignments/CGP1/cgp1-prep && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

@@ -73,24 +73,8 @@ bool Mesh::findEdge(vector<Edge> edges, Edge e, int &idx)
     return found;
 }
 
-bool Mesh::findEdgeCustom(vector<Edge> edges, Edge e)
-{
-    bool found = false;
-    int i = 0;
 
-    // linear search of edge list
-    while(!found && i < (int) edges.size())
-    {
-        if( (edges[i].v[0] == e.v[0] && edges[i].v[1] == e.v[1]) || (edges[i].v[1] == e.v[0] && edges[i].v[0] == e.v[1]) )
-        {
-            found = true;
-        }
-        i++;
-    }
-    return found;
-}
-
-long Mesh::hashVert(cgp::Point pnt, cgp::BoundBox bbox)
+long Mesh::hashVert(cgp::Point pnt, cgp::BoundBox bbox1)
 {
     long x, y, z;
     float range = 2500.0f;
@@ -99,9 +83,9 @@ long Mesh::hashVert(cgp::Point pnt, cgp::BoundBox bbox)
     lrangesq = lrange * lrange;
 
     // discretise vertex within bounds of the enclosing bounding box
-    x = (long) (((pnt.x - bbox.min.x) * range) / bbox.diagLen()) * lrangesq;
-    y = (long) (((pnt.y - bbox.min.y) * range) / bbox.diagLen()) * lrange;
-    z = (long) (((pnt.z - bbox.min.z) * range) / bbox.diagLen());
+    x = (long) (((pnt.x - bbox1.min.x) * range) / bbox1.diagLen()) * lrangesq;
+    y = (long) (((pnt.y - bbox1.min.y) * range) / bbox1.diagLen()) * lrange;
+    z = (long) (((pnt.z - bbox1.min.z) * range) / bbox1.diagLen());
     return x+y+z;
 }
 
@@ -112,7 +96,7 @@ void Mesh::mergeVerts()
     int i, p, hitcount = 0;
     // use hashmap to quickly look up vertices with the same coordinates
     std::unordered_map<long, int> idxlookup; // key is concatenation of vertex position, value is index into the cleanverts vector
-    cgp::BoundBox bbox;
+    //cgp::BoundBox bbox;
 
     // construct a bounding box enclosing all vertices
     for(i = 0; i < (int) verts.size(); i++)
@@ -461,36 +445,14 @@ bool Mesh::basicValidity()
 {
     // stub, needs completing
 
-    int vert0 = tris[0].v[0];
-    int vert1 = tris[0].v[1];
-    int vert2 = tris[0].v[2];
-
-    //creating 3 edges
-    Edge temp0;
-    temp0.v[0] = vert0;
-    temp0.v[1] = vert1;
-
-    Edge temp1;
-    temp1.v[0] = vert1;
-    temp1.v[1] = vert2;
-
-    Edge temp2;
-    temp2.v[0] = vert2;
-    temp2.v[1] = vert0;
-
-    //adding initial triangle edges to edge list
-    edges.push_back(temp0);
-    edges.push_back(temp1);
-    edges.push_back(temp2);
-
-
     int numt = (int) tris.size();   //size of triangle list
-    for (int x = 1; x < numt; x++)  //loop through each triangle to get vectices
+    for (int x = 0; x < numt; x++)  //loop through each triangle to get vectices
     {
         int vert0 = tris[x].v[0];
         int vert1 = tris[x].v[1];
         int vert2 = tris[x].v[2];
 
+        
         //creating 3 edges
         Edge temp0;
         temp0.v[0] = vert0;
@@ -504,22 +466,44 @@ bool Mesh::basicValidity()
         temp2.v[0] = vert2;
         temp2.v[1] = vert0;
 
-        //check if edges list contains edge. if not add it
-        if(findEdgeCustom(edges, temp0) == false)
+        cgp::Point midpoint;
+        //midpoint calculations
+        midpoint.x = (verts[temp0.v[0]].x + verts[temp0.v[1]].x)/2;
+        midpoint.y = (verts[temp0.v[0]].y + verts[temp0.v[1]].y)/2;
+        midpoint.z = (verts[temp0.v[0]].z + verts[temp0.v[1]].z)/2;
+
+        //use hash function for key  
+        int key = hashVert(midpoint, bbox);
+
+        if(edges.find(key) == edges.end())
         {
-            edges.push_back(temp0);
+            edges[key] = temp0;
         }
 
-        //check if edges list contains edge. if not add it
-        if(findEdgeCustom(edges, temp1) == false)
+        //midpoint calculations
+        midpoint.x = (verts[temp1.v[0]].x + verts[temp1.v[1]].x)/2;
+        midpoint.y = (verts[temp1.v[0]].y + verts[temp1.v[1]].y)/2;
+        midpoint.z = (verts[temp1.v[0]].z + verts[temp1.v[1]].z)/2;
+
+        //use hash function for key  
+        key = hashVert(midpoint, bbox);
+        
+        if(edges.find(key) == edges.end())
         {
-            edges.push_back(temp1);
+            edges[key] = temp1;
         }
 
-        //check if edges list contains edge. if not add it
-        if(findEdgeCustom(edges, temp2) == false)
+        //midpoint calculations
+        midpoint.x = (verts[temp2.v[0]].x + verts[temp2.v[1]].x)/2;
+        midpoint.y = (verts[temp2.v[0]].y + verts[temp2.v[1]].y)/2;
+        midpoint.z = (verts[temp2.v[0]].z + verts[temp2.v[1]].z)/2;
+
+        //use hash function for key  
+        key = hashVert(midpoint, bbox);
+        
+        if(edges.find(key) == edges.end())
         {
-            edges.push_back(temp2);
+            edges[key] = temp2;
         }
 
     }
@@ -527,7 +511,7 @@ bool Mesh::basicValidity()
      cerr << "clean edges = " << edges.size() << endl;
 
 
-     bool isDangling = false;
+     /*bool isDangling = false;
      int count = edges.size();
      for(int i = 0; i < edges.size())
      {
@@ -545,7 +529,7 @@ bool Mesh::basicValidity()
         isDangling = true;
      }
 
-     cerr << "dangling vertices = " << count << endl;
+     cerr << "dangling vertices = " << count << endl;*/
 
 
 

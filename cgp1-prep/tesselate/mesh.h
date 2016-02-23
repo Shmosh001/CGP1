@@ -61,12 +61,14 @@ private:
     std::vector<cgp::Point> verts; ///< vertices of the tesselation structure
     std::vector<cgp::Vector> norms;  ///< per vertex normals
     std::vector<Triangle> tris; ///< edges connecting vertices
-    std::vector<Edge> edges; ///< edge list
+    //td::vector<Edge> edges; ///< edge list
+    std::unordered_map<int, Edge> edges;
     GLfloat * col;              ///< (r,g,b,a) colour
     float scale;                ///< scaling factor
     cgp::Vector trx;                 ///< translation
     float xrot, yrot, zrot;     ///< rotation angles about x, y, and z axes
     std::vector<Sphere> boundspheres; ///< bounding sphere accel structure
+    cgp::BoundBox bbox;
 
     /**
      * Search list of vertices to find matching point
@@ -86,7 +88,6 @@ private:
      * @retval false otherwise
      */
     bool findEdge(vector<Edge> edges, Edge e, int &idx);
-    bool findEdgeCustom(vector<Edge> edges, Edge e);
 
     /**
      * Construct a hash key based on a 3D point

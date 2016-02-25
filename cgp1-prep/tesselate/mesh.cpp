@@ -444,6 +444,7 @@ bool Mesh::writeSTL(string filename)
 bool Mesh::basicValidity()
 {
     // stub, needs completing
+    bool isValid = true;
 
     int numt = (int) tris.size();   //size of triangle list
     for (int x = 0; x < numt; x++)  //loop through each triangle to get vectices
@@ -452,88 +453,115 @@ bool Mesh::basicValidity()
         int vert1 = tris[x].v[1];
         int vert2 = tris[x].v[2];
 
+        //vector of temporary edges
+        Edge tempEdges[3];
         
-        //creating 3 edges
+        //creating 3 edges and add to vector
         Edge temp0;
         temp0.v[0] = vert0;
         temp0.v[1] = vert1;
+        tempEdges[0] = temp0;
 
         Edge temp1;
         temp1.v[0] = vert1;
         temp1.v[1] = vert2;
+        tempEdges[1] = temp1;
 
         Edge temp2;
         temp2.v[0] = vert2;
         temp2.v[1] = vert0;
+        tempEdges[2] = temp2;
 
-        cgp::Point midpoint;
-        //midpoint calculations
-        midpoint.x = (verts[temp0.v[0]].x + verts[temp0.v[1]].x)/2;
-        midpoint.y = (verts[temp0.v[0]].y + verts[temp0.v[1]].y)/2;
-        midpoint.z = (verts[temp0.v[0]].z + verts[temp0.v[1]].z)/2;
-
-        //use hash function for key  
-        int key = hashVert(midpoint, bbox);
-
-        if(edges.find(key) == edges.end())
+        //loop through edges
+        for (int i = 0; i < 3; ++i)
         {
-            edges[key] = temp0;
-        }
-
-        //midpoint calculations
-        midpoint.x = (verts[temp1.v[0]].x + verts[temp1.v[1]].x)/2;
-        midpoint.y = (verts[temp1.v[0]].y + verts[temp1.v[1]].y)/2;
-        midpoint.z = (verts[temp1.v[0]].z + verts[temp1.v[1]].z)/2;
-
-        //use hash function for key  
-        key = hashVert(midpoint, bbox);
-        
-        if(edges.find(key) == edges.end())
-        {
-            edges[key] = temp1;
-        }
-
-        //midpoint calculations
-        midpoint.x = (verts[temp2.v[0]].x + verts[temp2.v[1]].x)/2;
-        midpoint.y = (verts[temp2.v[0]].y + verts[temp2.v[1]].y)/2;
-        midpoint.z = (verts[temp2.v[0]].z + verts[temp2.v[1]].z)/2;
-
-        //use hash function for key  
-        key = hashVert(midpoint, bbox);
-        
-        if(edges.find(key) == edges.end())
-        {
-            edges[key] = temp2;
-        }
-
-    }
-
-     cerr << "clean edges = " << edges.size() << endl;
-
-
-     /*bool isDangling = false;
-     int count = edges.size();
-     for(int i = 0; i < edges.size())
-     {
-        for (int j = 0; j < tris.size(); j++)
-        {
-            if(edges[i] == tris[j].v[0] || edges[i] == tris[j].v[1] || edges[i] == tris[j].v[2])
+            if(tempEdges[i].v[0] <= tempEdges[i].v[1])
             {
-                count--;
+                int key = tempEdges[i].v[0];
+                //check if vector is empty
+                if(edges[key].size() == 0)
+                {
+                    edges[key].push_back(verts[tempEdges[i].v[1]]);
+                }
+
+                //vector has points in it
+                else
+                {
+                    bool exists = false;
+                    //loop through vector of points
+                    for(int j = 0; j < edges[key].size(); ++j)
+                    {
+                        //check if point already exists
+                        if(edges[key][j] == verts[tempEdges[i].v[1]])
+                        {
+                            exists = true;
+                            break;
+                        }
+                    }
+
+                    //if point does not exist, add point
+                    if(exists == false)
+                    {
+                        edges[key].push_back(verts[tempEdges[i].v[1]]);
+                    }
+                }                
             }
-        }
-     }
 
-     if(count == 0)
-     {
-        isDangling = true;
-     }
+            else if(tempEdges[i].v[1] < tempEdges[i].v[0])
+            {
+                //int key = hashVert(verts[tempEdges[i].v[1]], bbox);
+                int key = tempEdges[i].v[1];
+                //check if vector is empty
+                if(edges[key].size() == 0)
+                {
+                    edges[key].push_back(verts[tempEdges[i].v[0]]);
+                    
+                }
 
-     cerr << "dangling vertices = " << count << endl;*/
+                //vector has points in it
+                else
+                {
+                    bool exists = false;
+                    //loop through vector of points
+                    for(int j = 0; j < edges[key].size(); ++j)
+                    {
+                        //check if point already exists
+                        if(edges[key][j] == verts[tempEdges[i].v[0]])
+                        {
+                            exists = true;
+                            break;
+                        }
+                    }
+
+                    //if point does not exist, add point
+                    if(exists == false)
+                    {
+                        edges[key].push_back(verts[tempEdges[i].v[0]]);
+                    }
+                }                
+            }
+
+        }//end loop through edges
+
+    } //end for loop of triangles
+
+    
+    int countEdges = 0;
+    for(int i = 0; i < edges.size(); i++)
+    {
+        countEdges = countEdges + edges[i].size();
+    }
+    
+    cerr << "clean edges = " << countEdges << endl;    
+
+    //  cerr << "dangling vertices = " << count << endl;
 
 
 
      //V – E + F = 2 – 2G
+    int lhs = verts.size - edges.size + tris.size();
+    int genus = (-lhs + 2)/2;
+    cerr << "Genus should be " << genus << " to be valid." << endl; 
 
     return true;
 }

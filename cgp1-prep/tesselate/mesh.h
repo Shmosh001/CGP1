@@ -61,8 +61,8 @@ private:
     std::vector<cgp::Point> verts; ///< vertices of the tesselation structure
     std::vector<cgp::Vector> norms;  ///< per vertex normals
     std::vector<Triangle> tris; ///< edges connecting vertices
-    //td::vector<Edge> edges; ///< edge list
-    std::unordered_map<int, Edge> edges;
+    //std::vector<Edge> edges; ///< edge list
+    std::unordered_map<int, std::vector<cgp::Point>> edges; //unordered map used to get clean edges
     GLfloat * col;              ///< (r,g,b,a) colour
     float scale;                ///< scaling factor
     cgp::Vector trx;                 ///< translation

@@ -196,6 +196,8 @@ public:
      * @todo manifoldValidity requires completing for CGP Prac1
      */
     bool manifoldValidity();
+
+    bool ManifoldTest();
 };
 
 #endif

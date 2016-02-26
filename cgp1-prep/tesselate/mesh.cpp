@@ -601,7 +601,16 @@ bool Mesh::basicValidity()
 
 bool Mesh::manifoldValidity()
 {
-    // stub, needs completing
+    ManifoldTest();
+   
+
+    return true;
+}
+
+bool Mesh::twoManifoldTest()
+{
+    bool manifoldPass = true;
+     // builds a hash table of hash tables. each vertex has a hash table of all the connecting vertices
     int numt = (int) tris.size();   //size of triangle list
     for (int x = 0; x < numt; x++)  //loop through each triangle to get vectices
     {
@@ -631,12 +640,9 @@ bool Mesh::manifoldValidity()
         //loop through edges
         for (int i = 0; i < 3; ++i)
         {
-        
-            int key = tempEdges[i].v[0];
-            edgeList[key][tempEdges[i].v[1]] = 1;
-
-            key = tempEdges[i].v[1];
-            edgeList[key][tempEdges[i].v[0]] = 1;
+            //add each vertex to a hash table
+            edgeList[tempEdges[i].v[0]][tempEdges[i].v[1]] = 1;
+            edgeList[tempEdges[i].v[1]][tempEdges[i].v[0]] = 1;
 
         }//end loop through edges
 
@@ -646,16 +652,21 @@ bool Mesh::manifoldValidity()
     int count = 0;
     int marchingTri = 0;
 
+    //for each vertex
     for(auto it0 = edgeList.begin(); it0 != edgeList.end(); ++it0)
     {
+        //obtain key
         int key0 =  it0->first;
 
+        //loop through table of all connecting vertices to edgeList[key]
         for (auto it1 = edgeList[key0].begin(); it1 != edgeList[key0].end(); ++it1)
         {
+            //obtain key
             int key1 = it1->first;
             for (auto it2 = edgeList[key1].begin(); it2 != edgeList[key1].end(); ++it2)
             {
                 int key2 = it2->first;
+                //check if a vertex exists
                 if (edgeList[key0].find(key2) != edgeList[key0].end())
                 {
                     //cerr << "equal" << endl;
@@ -666,13 +677,12 @@ bool Mesh::manifoldValidity()
         
         if(count == edgeList[key0].size() * 2)
         {
-            marchingTri ++;
+            manifold = false;
+            break;
         }
         count = 0;
     }
 
-    cerr << "Wrap around vertices = " << marchingTri << endl;
-
-
-    return true;
+    return manifoldPass;
 }
+

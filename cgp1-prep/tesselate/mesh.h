@@ -59,9 +59,10 @@ class Mesh
 {
 private:
     std::vector<cgp::Point> verts; ///< vertices of the tesselation structure
+    int dirtyVerts; //number of dirty vertices
     std::vector<cgp::Vector> norms;  ///< per vertex normals
     std::vector<Triangle> tris; ///< edges connecting vertices
-    //std::vector<Edge> edges; ///< edge list
+    std::unordered_map<int, std::unordered_map<int, int>> edgeList; ///< edge list
     std::unordered_map<int, std::vector<cgp::Point>> edges; //unordered map used to get clean edges
     GLfloat * col;              ///< (r,g,b,a) colour
     float scale;                ///< scaling factor

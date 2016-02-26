@@ -536,7 +536,7 @@ bool Mesh::basicValidity()
                     //if point does not exist, add point
                     if(exists == false)
                     {
-                        edges[key].push_back(verts[tempEdges[i].v[0]]);
+                        edges[key].push_back(verts[tempEdges[i].v[0]]);                   
                     }
                 }                
             }
@@ -552,22 +552,127 @@ bool Mesh::basicValidity()
         countEdges = countEdges + edges[i].size();
     }
     
-    cerr << "clean edges = " << countEdges << endl;    
+    cerr << "clean edges = " << countEdges << endl;
 
-    //  cerr << "dangling vertices = " << count << endl;
-
-
-
+    
      //V – E + F = 2 – 2G
-    int lhs = verts.size - edges.size + tris.size();
-    int genus = (-lhs + 2)/2;
-    cerr << "Genus should be " << genus << " to be valid." << endl; 
+    int lhs = verts.size() - countEdges + tris.size();
+    cerr << "Euler’s Characteristic equation lhs = " << lhs << endl;
+    // int genus = (-lhs + 2)/2;
+    // cerr << "Genus should be " << genus << " for to be valid." << endl; 
 
-    return true;
+//check for dangling vertices
+    int danglingVerts = 0;
+    std::vector<int> vertsClone;
+    //create a clone of verts vector and set all values to 0.
+    for (int i = 0; i < verts.size(); ++i)
+    {
+        vertsClone.push_back(0);
+    }
+
+    //for every vertex in the triangle, set value at position to 1
+    for (int i = 0; i < tris.size(); ++i)
+    {
+        vertsClone[tris[i].v[0]] = 1;
+        vertsClone[tris[i].v[1]] = 1;
+        vertsClone[tris[i].v[2]] = 1;
+    }
+
+    for (int i = 0; i < vertsClone.size(); ++i)
+    {
+        if(vertsClone[i] == 0)
+        {
+            danglingVerts++;
+        }
+    }
+    
+
+    cerr << "Dangling vertices = " << danglingVerts << endl;
+
+    if(danglingVerts > 0)
+    {
+        isValid = false;
+    }
+
+    manifoldValidity();
+
+    return isValid;
 }
 
 bool Mesh::manifoldValidity()
 {
     // stub, needs completing
+    int numt = (int) tris.size();   //size of triangle list
+    for (int x = 0; x < numt; x++)  //loop through each triangle to get vectices
+    {
+        int vert0 = tris[x].v[0];
+        int vert1 = tris[x].v[1];
+        int vert2 = tris[x].v[2];
+
+        //vector of temporary edges
+        Edge tempEdges[3];
+        
+        //creating 3 edges and add to vector
+        Edge temp0;
+        temp0.v[0] = vert0;
+        temp0.v[1] = vert1;
+        tempEdges[0] = temp0;
+
+        Edge temp1;
+        temp1.v[0] = vert1;
+        temp1.v[1] = vert2;
+        tempEdges[1] = temp1;
+
+        Edge temp2;
+        temp2.v[0] = vert2;
+        temp2.v[1] = vert0;
+        tempEdges[2] = temp2;
+
+        //loop through edges
+        for (int i = 0; i < 3; ++i)
+        {
+        
+            int key = tempEdges[i].v[0];
+            edgeList[key][tempEdges[i].v[1]] = 1;
+
+            key = tempEdges[i].v[1];
+            edgeList[key][tempEdges[i].v[0]] = 1;
+
+        }//end loop through edges
+
+    } //end for loop of triangles
+
+
+    int count = 0;
+    int marchingTri = 0;
+
+    for(auto it0 = edgeList.begin(); it0 != edgeList.end(); ++it0)
+    {
+        int key0 =  it0->first;
+
+        for (auto it1 = edgeList[key0].begin(); it1 != edgeList[key0].end(); ++it1)
+        {
+            int key1 = it1->first;
+            for (auto it2 = edgeList[key1].begin(); it2 != edgeList[key1].end(); ++it2)
+            {
+                int key2 = it2->first;
+                if (edgeList[key0].find(key2) != edgeList[key0].end())
+                {
+                    //cerr << "equal" << endl;
+                    count ++;
+                }
+            }       
+        }
+        
+        if(count == edgeList[key0].size() * 2)
+        {
+            marchingTri ++;
+        }
+        count = 0;
+    }
+
+    cerr << "Wrap around vertices = " << marchingTri << endl;
+
+
     return true;
 }

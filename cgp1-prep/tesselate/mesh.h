@@ -62,8 +62,10 @@ private:
     int dirtyVerts; //number of dirty vertices
     std::vector<cgp::Vector> norms;  ///< per vertex normals
     std::vector<Triangle> tris; ///< edges connecting vertices
-    std::unordered_map<int, std::unordered_map<int, int>> edgeList; ///< edge list
+    std::unordered_map<int, std::unordered_map<int, int>> linkedVerts; ///< edge list
     std::unordered_map<int, std::vector<cgp::Point>> edges; //unordered map used to get clean edges
+    std::unordered_map<int, std::vector<cgp::Point>> edgeList; //unordered map used to get edges
+    std::vector<Edge> uniqueEdges;
     GLfloat * col;              ///< (r,g,b,a) colour
     float scale;                ///< scaling factor
     cgp::Vector trx;                 ///< translation
@@ -187,6 +189,10 @@ public:
      */
     bool basicValidity();
 
+    void eulersEquation();
+
+    bool danglingVertices();
+
     /**
      * Check that the mesh is a closed two-manifold - every edge has two incident triangles, every vertex has
      *                                                a closed ring of triangles around it
@@ -197,7 +203,9 @@ public:
      */
     bool manifoldValidity();
 
-    bool ManifoldTest();
+    bool twoManifoldTest();
+
+    bool closedManifold();
 };
 
 #endif

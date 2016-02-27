@@ -443,9 +443,26 @@ bool Mesh::writeSTL(string filename)
 
 bool Mesh::basicValidity()
 {
-    // stub, needs completing
+    
     bool isValid = true;
 
+    //work out eulers characteristic equation
+    eulersEquation();
+    bool passDangling = danglingVertices();
+    if(passDangling == false)
+    {
+        isValid = false;
+    }
+
+    manifoldValidity();
+
+    return isValid;
+}
+
+//method for eulers characteristic equation
+void Mesh::eulersEquation ()
+{
+    
     int numt = (int) tris.size();   //size of triangle list
     for (int x = 0; x < numt; x++)  //loop through each triangle to get vectices
     {
@@ -482,6 +499,8 @@ bool Mesh::basicValidity()
                 if(edges[key].size() == 0)
                 {
                     edges[key].push_back(verts[tempEdges[i].v[1]]);
+                    uniqueEdges.push_back(tempEdges[i]);
+                    
                 }
 
                 //vector has points in it
@@ -503,6 +522,7 @@ bool Mesh::basicValidity()
                     if(exists == false)
                     {
                         edges[key].push_back(verts[tempEdges[i].v[1]]);
+                        uniqueEdges.push_back(tempEdges[i]);
                     }
                 }                
             }
@@ -514,7 +534,8 @@ bool Mesh::basicValidity()
                 //check if vector is empty
                 if(edges[key].size() == 0)
                 {
-                    edges[key].push_back(verts[tempEdges[i].v[0]]);
+                    edges[key].push_back(verts[tempEdges[i].v[0]]);                    
+                    uniqueEdges.push_back(tempEdges[i]);
                     
                 }
 
@@ -536,7 +557,8 @@ bool Mesh::basicValidity()
                     //if point does not exist, add point
                     if(exists == false)
                     {
-                        edges[key].push_back(verts[tempEdges[i].v[0]]);                   
+                        edges[key].push_back(verts[tempEdges[i].v[0]]);
+                        uniqueEdges.push_back(tempEdges[i]);                   
                     }
                 }                
             }
@@ -558,10 +580,13 @@ bool Mesh::basicValidity()
      //V – E + F = 2 – 2G
     int lhs = verts.size() - countEdges + tris.size();
     cerr << "Euler’s Characteristic equation lhs = " << lhs << endl;
-    // int genus = (-lhs + 2)/2;
-    // cerr << "Genus should be " << genus << " for to be valid." << endl; 
+}
 
-//check for dangling vertices
+//method for dangling vertices
+bool Mesh::danglingVertices()
+{
+    bool pass = true;
+    //check for dangling vertices
     int danglingVerts = 0;
     std::vector<int> vertsClone;
     //create a clone of verts vector and set all values to 0.
@@ -591,28 +616,208 @@ bool Mesh::basicValidity()
 
     if(danglingVerts > 0)
     {
-        isValid = false;
+        pass = false;
     }
 
-    manifoldValidity();
-
-    return isValid;
+    return pass;
 }
 
 bool Mesh::manifoldValidity()
 {
-    ManifoldTest();
-   
+    bool isValid = true;
 
-    return true;
+    bool passTwoManifold = twoManifoldTest();
+    if(passTwoManifold == true)
+    {
+        cerr << "Two Manifold test: Pass" << endl;
+    }
+
+    else
+    {
+        cerr << "Two Manifold test: Fail" << endl;
+    }
+    
+    bool passClosedManifold = closedManifold();
+    if(passClosedManifold == true)
+    {
+        cerr << "Closed manifold test: Pass" << endl;
+    }
+
+    else
+    {
+        cerr << "Closed manifold test: Fail" << endl;
+    }
+    
+
+    return isValid;
 }
 
 bool Mesh::twoManifoldTest()
 {
     bool manifoldPass = true;
-     // builds a hash table of hash tables. each vertex has a hash table of all the connecting vertices
+    std::vector<std::vector<Triangle>> triangleVector (verts.size());
+    std::vector<std::vector<Edge>> edgeVector (verts.size());
+       
+    
+    for (int x = 0; x < tris.size(); ++x)
+    {
+            int vert0 = tris[x].v[0];
+            int vert1 = tris[x].v[1];
+            int vert2 = tris[x].v[2];
+
+            triangleVector[vert0].push_back(tris[x]);
+            triangleVector[vert1].push_back(tris[x]);
+            triangleVector[vert2].push_back(tris[x]);
+    
+    } //end loop tris
+
+    for (int x = 0; x < uniqueEdges.size(); ++x)
+    {
+            int vert0 = uniqueEdges[x].v[0];
+            int vert1 = uniqueEdges[x].v[1];
+            
+            edgeVector[vert0].push_back(uniqueEdges[x]);
+            edgeVector[vert1].push_back(uniqueEdges[x]);
+
+    
+    } //end loop tris
+
+    for (int i = 0; i < triangleVector.size(); ++i)
+    {
+        if(triangleVector[i].size() != edgeVector[i].size())
+        {
+            manifoldPass = false;
+            break;
+        }
+    }
+
+
+    //  // builds a hash table of hash tables. each vertex has a hash table of all the connecting vertices
+    // int numt = (int) tris.size();   //size of triangle list
+    // for (int x = 0; x < numt; x++)  //loop through each triangle to get vectices
+    // {
+    //     int vert0 = tris[x].v[0];
+    //     int vert1 = tris[x].v[1];
+    //     int vert2 = tris[x].v[2];
+
+    //     //vector of temporary edges
+    //     Edge tempEdges[3];
+        
+    //     //creating 3 edges and add to vector
+    //     Edge temp0;
+    //     temp0.v[0] = vert0;
+    //     temp0.v[1] = vert1;
+    //     tempEdges[0] = temp0;
+
+    //     Edge temp1;
+    //     temp1.v[0] = vert1;
+    //     temp1.v[1] = vert2;
+    //     tempEdges[1] = temp1;
+
+    //     Edge temp2;
+    //     temp2.v[0] = vert2;
+    //     temp2.v[1] = vert0;
+    //     tempEdges[2] = temp2;
+
+    //     //loop through edges
+    //     for (int i = 0; i < 3; ++i)
+    //     {
+    //         //add each vertex to a hash table
+    //         linkedVerts[tempEdges[i].v[0]][tempEdges[i].v[1]] = 1;
+    //         linkedVerts[tempEdges[i].v[1]][tempEdges[i].v[0]] = 1;
+
+    //     }//end loop through edges
+
+    // } //end for loop of triangles
+
+
+    // int count = 0;
+    // std::vector<std::unordered_map<int, int>> triangles;
+    
+
+    // //for each vertex
+    // for(auto it0 = linkedVerts.begin(); it0 != linkedVerts.end(); ++it0)
+    // {
+    //     //obtain key
+    //     int key0 =  it0->first;
+    //     if(it0->second.size() < 3)
+    //     {
+    //         break;
+    //     }
+
+    //     //loop through table of all connecting vertices to linkedVerts[key]
+    //     for (auto it1 = linkedVerts[key0].begin(); it1 != linkedVerts[key0].end(); ++it1)
+    //     {
+    //         //obtain key
+    //         int key1 = it1->first;
+    //         int counter = 0;
+    //         for (auto it2 = linkedVerts[key1].begin(); it2 != linkedVerts[key1].end(); ++it2)
+    //         {
+    //             int key2 = it2->first;
+    //             //check if a vertex exists
+    //             if (linkedVerts[key0].find(key2) != linkedVerts[key0].end())
+    //             {
+    //                 count ++;
+    //                 counter ++;
+    //             }
+
+    //             if(counter == 2)
+    //             {
+    //                 std::unordered_map<int, int> triangleVecs;
+    //                 triangleVecs[key0] = 1;
+    //                 triangleVecs[key1] = 1;
+    //                 triangleVecs[key2] = 1;
+    //                 triangles.push_back(triangleVecs);
+    //                 break;
+    //             }
+    //         }       
+    //     }
+        
+    //     if(count == linkedVerts[key0].size() * 2)
+    //     {
+    //         bool check = true;
+    //         manifoldPass = true;
+    //         int counterCheck = 0;
+    //         for (int i = 0; i < triangles.size(); ++i)
+    //         {
+    //             for (int j = 0; j < tris.size(); ++j)
+    //             {
+    //                 if(triangles[i].find(tris[j].v[0]) != triangles[i].end() && triangles[i].find(tris[j].v[1]) != triangles[i].end() && triangles[i].find(tris[j].v[2]) != triangles[i].end())
+    //                 {
+    //                     check = true;
+    //                     counterCheck ++;
+
+    //                     break;
+    //                 }
+                    
+    //             }
+                
+    //         }
+    //         if(counterCheck != triangles.size())
+    //         {
+    //             manifoldPass = false;
+    //         }
+            
+    //     }
+
+    //     else
+    //     {
+    //         manifoldPass = false;
+    //         break;
+    //     }
+    //     count = 0;
+    // } //end vertex loop
+
+    return manifoldPass;
+}
+
+//check if every edge has 2 adjacent triangles
+bool Mesh::closedManifold()
+{
+    bool pass = true;
+
     int numt = (int) tris.size();   //size of triangle list
-    for (int x = 0; x < numt; x++)  //loop through each triangle to get vectices
+    for (int x = 0; x < numt; x++)  //loop through each triangle to get vertices
     {
         int vert0 = tris[x].v[0];
         int vert1 = tris[x].v[1];
@@ -640,49 +845,32 @@ bool Mesh::twoManifoldTest()
         //loop through edges
         for (int i = 0; i < 3; ++i)
         {
-            //add each vertex to a hash table
-            edgeList[tempEdges[i].v[0]][tempEdges[i].v[1]] = 1;
-            edgeList[tempEdges[i].v[1]][tempEdges[i].v[0]] = 1;
+            if(tempEdges[i].v[0] <= tempEdges[i].v[1])
+            {
+                edgeList[tempEdges[i].v[0]].push_back(verts[tempEdges[i].v[1]]);
+                               
+            }
+
+            else if(tempEdges[i].v[1] < tempEdges[i].v[0])
+            {
+                edgeList[tempEdges[i].v[1]].push_back(verts[tempEdges[i].v[0]]);                
+            }
 
         }//end loop through edges
 
     } //end for loop of triangles
 
 
-    int count = 0;
-    int marchingTri = 0;
-
-    //for each vertex
-    for(auto it0 = edgeList.begin(); it0 != edgeList.end(); ++it0)
+    for(auto it = edgeList.begin(); it != edgeList.end(); ++it)
     {
-        //obtain key
-        int key0 =  it0->first;
-
-        //loop through table of all connecting vertices to edgeList[key]
-        for (auto it1 = edgeList[key0].begin(); it1 != edgeList[key0].end(); ++it1)
+        cerr << "Closed" << it->second.size() << endl;
+        if(it->second.size() != 2)
         {
-            //obtain key
-            int key1 = it1->first;
-            for (auto it2 = edgeList[key1].begin(); it2 != edgeList[key1].end(); ++it2)
-            {
-                int key2 = it2->first;
-                //check if a vertex exists
-                if (edgeList[key0].find(key2) != edgeList[key0].end())
-                {
-                    //cerr << "equal" << endl;
-                    count ++;
-                }
-            }       
-        }
-        
-        if(count == edgeList[key0].size() * 2)
-        {
-            manifold = false;
+            pass = false;
             break;
         }
-        count = 0;
     }
 
-    return manifoldPass;
+    return pass;
 }
 

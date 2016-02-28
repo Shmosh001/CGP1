@@ -384,10 +384,95 @@ bool Mesh::readSTL(string filename)
         mergeVerts();
         // normal vectors at vertices are needed for rendering so derive from incident faces
         deriveVertNorms();
-        if(basicValidity())
-            cerr << "loaded file has basic validity" << endl;
-        else
-            cerr << "loaded file does not pass basic validity" << endl;
+        basicValidity();
+        manifoldValidity();
+        
+    }
+    else
+    {
+        cerr << "Error Mesh::readSTL: unable to open " << filename << endl;
+        return false;
+    }
+    return true;
+}
+
+bool Mesh::readSTLTest(string filename)
+{
+    ifstream infile;
+    char * inbuffer;
+    struct stat results;
+    int insize, inpos, numt, t, i;
+    cgp::Point vpos;
+    Triangle tri;
+
+    // assumes binary format STL file
+    infile.open((char *) filename.c_str(), ios_base::in | ios_base::binary);
+    if(infile.is_open())
+    {
+        clear();
+
+        // get the size of the file
+        stat((char *) filename.c_str(), &results);
+        insize = results.st_size;
+
+        // put file contents in buffer
+        inbuffer = new char[insize];
+        infile.read(inbuffer, insize);
+        if(!infile) // failed to read from the file for some reason
+        {
+            cerr << "Error Mesh::readSTL: unable to populate read buffer" << endl;
+            return false;
+        }
+
+        // interpret buffer as STL file
+        if(insize <= 84)
+        {
+            cerr << "Error Mesh::readSTL: invalid STL binary file, too small" << endl;
+            return false;
+        }
+
+        inpos = 80; // skip 80 character header
+        if(inpos+4 >= insize){ cerr << "Error Mesh::readSTL: malformed header on stl file" << endl; return false; }
+        numt = (int) (* ((long *) &inbuffer[inpos]));
+        inpos += 4;
+
+        t = 0;
+
+        // triangle vertices have consistent outward facing clockwise winding (right hand rule)
+        while(t < numt) // read in triangle data
+        {
+            // normal
+            if(inpos+12 >= insize){ cerr << "Error Mesh::readSTL: malformed stl file" << endl; return false; }
+            // IEEE floating point 4-byte binary numerical representation, IEEE754, little endian
+            tri.n = cgp::Vector((* ((float *) &inbuffer[inpos])), (* ((float *) &inbuffer[inpos+4])), (* ((float *) &inbuffer[inpos+8])));
+            inpos += 12;
+
+            // vertices
+            for(i = 0; i < 3; i++)
+            {
+                if(inpos+12 >= insize){ cerr << "Error Mesh::readSTL: malformed stl file" << endl; return false; }
+                vpos = cgp::Point((* ((float *) &inbuffer[inpos])), (* ((float *) &inbuffer[inpos+4])), (* ((float *) &inbuffer[inpos+8])));
+                tri.v[i] = (int) verts.size();
+                verts.push_back(vpos);
+                inpos += 12;
+            }
+            tris.push_back(tri);
+            t++;
+            inpos += 2; // handle attribute byte count - which can simply be discarded
+        }
+
+        // tidy up
+        delete inbuffer;
+        infile.close();
+
+        cerr << "num vertices = " << (int) verts.size() << endl;
+        cerr << "num triangles = " << (int) tris.size() << endl;
+
+        // STL provides a triangle soup so merge vertices that are coincident
+        mergeVerts();
+        // normal vectors at vertices are needed for rendering so derive from incident faces
+        deriveVertNorms();
+        
     }
     else
     {
@@ -447,22 +532,21 @@ bool Mesh::basicValidity()
     bool isValid = true;
 
     //work out eulers characteristic equation
-    eulersEquation();
+    int lhs = eulersEquation();
+    cerr << "Euler’s Characteristic equation lhs = " << lhs << endl;
     bool passDangling = danglingVertices();
     if(passDangling == false)
     {
         isValid = false;
     }
 
-    manifoldValidity();
-
     return isValid;
 }
 
 //method for eulers characteristic equation
-void Mesh::eulersEquation ()
+int Mesh::eulersEquation ()
 {
-    
+    int lhs = 0;
     int numt = (int) tris.size();   //size of triangle list
     for (int x = 0; x < numt; x++)  //loop through each triangle to get vectices
     {
@@ -498,14 +582,18 @@ void Mesh::eulersEquation ()
                 //check if vector is empty
                 if(edges[key].size() == 0)
                 {
+                    edgeCounter[key] = 1;
                     edges[key].push_back(verts[tempEdges[i].v[1]]);
                     uniqueEdges.push_back(tempEdges[i]);
+                    edgesOrientation[key].push_back(0);
+                    edgesOrientation[key].push_back(tempEdges[0].v[0]);
                     
                 }
 
                 //vector has points in it
                 else
                 {
+                    edgeCounter[key]++;
                     bool exists = false;
                     //loop through vector of points
                     for(int j = 0; j < edges[key].size(); ++j)
@@ -514,15 +602,20 @@ void Mesh::eulersEquation ()
                         if(edges[key][j] == verts[tempEdges[i].v[1]])
                         {
                             exists = true;
+                            if(edgesOrientation[key][j] == tempEdges[i].v[0])
+                            {
+                                windingCounter++;
+                            }
                             break;
                         }
                     }
 
                     //if point does not exist, add point
                     if(exists == false)
-                    {
+                    {                        
                         edges[key].push_back(verts[tempEdges[i].v[1]]);
                         uniqueEdges.push_back(tempEdges[i]);
+                        edgesOrientation[key].push_back(tempEdges[0].v[0]);
                     }
                 }                
             }
@@ -534,14 +627,18 @@ void Mesh::eulersEquation ()
                 //check if vector is empty
                 if(edges[key].size() == 0)
                 {
+                    edgeCounter[key] = 1;
                     edges[key].push_back(verts[tempEdges[i].v[0]]);                    
                     uniqueEdges.push_back(tempEdges[i]);
+                    edgesOrientation[key].push_back(0);
+                    edgesOrientation[key].push_back(tempEdges[0].v[1]);
                     
                 }
 
                 //vector has points in it
                 else
                 {
+                    edgeCounter[key]++;
                     bool exists = false;
                     //loop through vector of points
                     for(int j = 0; j < edges[key].size(); ++j)
@@ -550,6 +647,10 @@ void Mesh::eulersEquation ()
                         if(edges[key][j] == verts[tempEdges[i].v[0]])
                         {
                             exists = true;
+                            if(edgesOrientation[key][j] == tempEdges[i].v[1])
+                            {
+                                windingCounter++;
+                            }
                             break;
                         }
                     }
@@ -558,7 +659,8 @@ void Mesh::eulersEquation ()
                     if(exists == false)
                     {
                         edges[key].push_back(verts[tempEdges[i].v[0]]);
-                        uniqueEdges.push_back(tempEdges[i]);                   
+                        uniqueEdges.push_back(tempEdges[i]);
+                        edgesOrientation[key].push_back(tempEdges[0].v[0]);                   
                     }
                 }                
             }
@@ -571,15 +673,16 @@ void Mesh::eulersEquation ()
     int countEdges = 0;
     for(int i = 0; i < edges.size(); i++)
     {
-        countEdges = countEdges + edges[i].size();
+        countEdges = countEdges + edges[i].size() - 1;
     }
     
     cerr << "clean edges = " << countEdges << endl;
 
     
      //V – E + F = 2 – 2G
-    int lhs = verts.size() - countEdges + tris.size();
-    cerr << "Euler’s Characteristic equation lhs = " << lhs << endl;
+    lhs = verts.size() - countEdges + tris.size();
+    return lhs;
+    
 }
 
 //method for dangling vertices
@@ -626,6 +729,28 @@ bool Mesh::manifoldValidity()
 {
     bool isValid = true;
 
+    bool passClosedManifold = closedManifold();
+    if(passClosedManifold == true)
+    {
+        cerr << "Closed manifold test: Pass" << endl;
+    }
+
+    else
+    {
+        cerr << "Closed manifold test: Fail" << endl;
+    }
+
+    bool passWinding = windingManifold();
+    if(passWinding == true)
+    {
+        cerr << "Winding test: Pass" << endl;
+    }
+
+    else
+    {
+        cerr << "Winding test: Fail" << endl;
+    }
+
     bool passTwoManifold = twoManifoldTest();
     if(passTwoManifold == true)
     {
@@ -637,16 +762,11 @@ bool Mesh::manifoldValidity()
         cerr << "Two Manifold test: Fail" << endl;
     }
     
-    bool passClosedManifold = closedManifold();
-    if(passClosedManifold == true)
+    if(passClosedManifold == false || passWinding == false || passTwoManifold == false)
     {
-        cerr << "Closed manifold test: Pass" << endl;
+        isValid = false;
     }
-
-    else
-    {
-        cerr << "Closed manifold test: Fail" << endl;
-    }
+    
     
 
     return isValid;
@@ -692,122 +812,6 @@ bool Mesh::twoManifoldTest()
     }
 
 
-    //  // builds a hash table of hash tables. each vertex has a hash table of all the connecting vertices
-    // int numt = (int) tris.size();   //size of triangle list
-    // for (int x = 0; x < numt; x++)  //loop through each triangle to get vectices
-    // {
-    //     int vert0 = tris[x].v[0];
-    //     int vert1 = tris[x].v[1];
-    //     int vert2 = tris[x].v[2];
-
-    //     //vector of temporary edges
-    //     Edge tempEdges[3];
-        
-    //     //creating 3 edges and add to vector
-    //     Edge temp0;
-    //     temp0.v[0] = vert0;
-    //     temp0.v[1] = vert1;
-    //     tempEdges[0] = temp0;
-
-    //     Edge temp1;
-    //     temp1.v[0] = vert1;
-    //     temp1.v[1] = vert2;
-    //     tempEdges[1] = temp1;
-
-    //     Edge temp2;
-    //     temp2.v[0] = vert2;
-    //     temp2.v[1] = vert0;
-    //     tempEdges[2] = temp2;
-
-    //     //loop through edges
-    //     for (int i = 0; i < 3; ++i)
-    //     {
-    //         //add each vertex to a hash table
-    //         linkedVerts[tempEdges[i].v[0]][tempEdges[i].v[1]] = 1;
-    //         linkedVerts[tempEdges[i].v[1]][tempEdges[i].v[0]] = 1;
-
-    //     }//end loop through edges
-
-    // } //end for loop of triangles
-
-
-    // int count = 0;
-    // std::vector<std::unordered_map<int, int>> triangles;
-    
-
-    // //for each vertex
-    // for(auto it0 = linkedVerts.begin(); it0 != linkedVerts.end(); ++it0)
-    // {
-    //     //obtain key
-    //     int key0 =  it0->first;
-    //     if(it0->second.size() < 3)
-    //     {
-    //         break;
-    //     }
-
-    //     //loop through table of all connecting vertices to linkedVerts[key]
-    //     for (auto it1 = linkedVerts[key0].begin(); it1 != linkedVerts[key0].end(); ++it1)
-    //     {
-    //         //obtain key
-    //         int key1 = it1->first;
-    //         int counter = 0;
-    //         for (auto it2 = linkedVerts[key1].begin(); it2 != linkedVerts[key1].end(); ++it2)
-    //         {
-    //             int key2 = it2->first;
-    //             //check if a vertex exists
-    //             if (linkedVerts[key0].find(key2) != linkedVerts[key0].end())
-    //             {
-    //                 count ++;
-    //                 counter ++;
-    //             }
-
-    //             if(counter == 2)
-    //             {
-    //                 std::unordered_map<int, int> triangleVecs;
-    //                 triangleVecs[key0] = 1;
-    //                 triangleVecs[key1] = 1;
-    //                 triangleVecs[key2] = 1;
-    //                 triangles.push_back(triangleVecs);
-    //                 break;
-    //             }
-    //         }       
-    //     }
-        
-    //     if(count == linkedVerts[key0].size() * 2)
-    //     {
-    //         bool check = true;
-    //         manifoldPass = true;
-    //         int counterCheck = 0;
-    //         for (int i = 0; i < triangles.size(); ++i)
-    //         {
-    //             for (int j = 0; j < tris.size(); ++j)
-    //             {
-    //                 if(triangles[i].find(tris[j].v[0]) != triangles[i].end() && triangles[i].find(tris[j].v[1]) != triangles[i].end() && triangles[i].find(tris[j].v[2]) != triangles[i].end())
-    //                 {
-    //                     check = true;
-    //                     counterCheck ++;
-
-    //                     break;
-    //                 }
-                    
-    //             }
-                
-    //         }
-    //         if(counterCheck != triangles.size())
-    //         {
-    //             manifoldPass = false;
-    //         }
-            
-    //     }
-
-    //     else
-    //     {
-    //         manifoldPass = false;
-    //         break;
-    //     }
-    //     count = 0;
-    // } //end vertex loop
-
     return manifoldPass;
 }
 
@@ -815,56 +819,10 @@ bool Mesh::twoManifoldTest()
 bool Mesh::closedManifold()
 {
     bool pass = true;
-
-    int numt = (int) tris.size();   //size of triangle list
-    for (int x = 0; x < numt; x++)  //loop through each triangle to get vertices
+    for (auto it = edges.begin(); it != edges.end(); it++)
     {
-        int vert0 = tris[x].v[0];
-        int vert1 = tris[x].v[1];
-        int vert2 = tris[x].v[2];
-
-        //vector of temporary edges
-        Edge tempEdges[3];
-        
-        //creating 3 edges and add to vector
-        Edge temp0;
-        temp0.v[0] = vert0;
-        temp0.v[1] = vert1;
-        tempEdges[0] = temp0;
-
-        Edge temp1;
-        temp1.v[0] = vert1;
-        temp1.v[1] = vert2;
-        tempEdges[1] = temp1;
-
-        Edge temp2;
-        temp2.v[0] = vert2;
-        temp2.v[1] = vert0;
-        tempEdges[2] = temp2;
-
-        //loop through edges
-        for (int i = 0; i < 3; ++i)
-        {
-            if(tempEdges[i].v[0] <= tempEdges[i].v[1])
-            {
-                edgeList[tempEdges[i].v[0]].push_back(verts[tempEdges[i].v[1]]);
-                               
-            }
-
-            else if(tempEdges[i].v[1] < tempEdges[i].v[0])
-            {
-                edgeList[tempEdges[i].v[1]].push_back(verts[tempEdges[i].v[0]]);                
-            }
-
-        }//end loop through edges
-
-    } //end for loop of triangles
-
-
-    for(auto it = edgeList.begin(); it != edgeList.end(); ++it)
-    {
-        cerr << "Closed" << it->second.size() << endl;
-        if(it->second.size() != 2)
+        int key = it->first;
+        if(edges[key].size() * 2 != edgeCounter[key])
         {
             pass = false;
             break;
@@ -873,4 +831,17 @@ bool Mesh::closedManifold()
 
     return pass;
 }
+
+ bool Mesh::windingManifold()
+ {
+    bool pass = true;
+
+    if(windingCounter > 0)
+    {
+        pass = false;
+    }
+
+
+    return pass;
+ }
 

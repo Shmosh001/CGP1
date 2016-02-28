@@ -62,9 +62,10 @@ private:
     int dirtyVerts; //number of dirty vertices
     std::vector<cgp::Vector> norms;  ///< per vertex normals
     std::vector<Triangle> tris; ///< edges connecting vertices
-    std::unordered_map<int, std::unordered_map<int, int>> linkedVerts; ///< edge list
     std::unordered_map<int, std::vector<cgp::Point>> edges; //unordered map used to get clean edges
-    std::unordered_map<int, std::vector<cgp::Point>> edgeList; //unordered map used to get edges
+    std::unordered_map<int, std::vector<int>> edgesOrientation; //unordered map used to work out edge orientation
+    int windingCounter; //counts how many edges are not orientable
+    std::unordered_map<int, int> edgeCounter; //unordered map used to get clean edges
     std::vector<Edge> uniqueEdges;
     GLfloat * col;              ///< (r,g,b,a) colour
     float scale;                ///< scaling factor
@@ -172,6 +173,7 @@ public:
      * @retval false otherwise.
      */
     bool readSTL(string filename);
+    bool readSTLTest(string filename);
 
     /**
      * Write triangle mesh to STL format binary file
@@ -189,7 +191,7 @@ public:
      */
     bool basicValidity();
 
-    void eulersEquation();
+    int eulersEquation();
 
     bool danglingVertices();
 
@@ -206,6 +208,8 @@ public:
     bool twoManifoldTest();
 
     bool closedManifold();
+
+    bool windingManifold();
 };
 
 #endif
